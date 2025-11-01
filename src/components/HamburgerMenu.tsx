@@ -10,7 +10,7 @@ export default function HamburgerMenu({ isOpen, onClick }: HamburgerMenuProps) {
   return (
     <motion.button
       onClick={onClick}
-      className="fixed top-8 left-8 z-[9997] w-14 h-14 bg-black/40 backdrop-blur-xl border border-white/10 rounded-full flex flex-col items-center justify-center gap-1.5 hover:scale-110 transition-all group"
+      className="fixed top-4 left-4 md:top-8 md:left-8 z-[9997] w-12 h-12 md:w-14 md:h-14 bg-black/40 backdrop-blur-xl border border-white/10 rounded-full flex flex-col items-center justify-center gap-1.5 hover:scale-110 transition-all group touch-manipulation"
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
       style={{ filter: 'drop-shadow(0 0 20px rgba(255,255,255,0.1))' }}
@@ -19,8 +19,8 @@ export default function HamburgerMenu({ isOpen, onClick }: HamburgerMenuProps) {
       <motion.div
         animate={
           isOpen
-            ? { rotate: 45, y: 8, width: '20px' }
-            : { rotate: 0, y: 0, width: '20px' }
+            ? { rotate: 45, y: 8, width: '18px' }
+            : { rotate: 0, y: 0, width: '18px' }
         }
         transition={{ duration: 0.3, ease: [0.43, 0.13, 0.23, 0.96] }}
         className="h-[2px] bg-white rounded-full origin-center"
@@ -29,7 +29,7 @@ export default function HamburgerMenu({ isOpen, onClick }: HamburgerMenuProps) {
 
       {/* Ligne 2 */}
       <motion.div
-        animate={isOpen ? { opacity: 0, width: '20px' } : { opacity: 1, width: '20px' }}
+        animate={isOpen ? { opacity: 0, width: '18px' } : { opacity: 1, width: '18px' }}
         transition={{ duration: 0.3, ease: [0.43, 0.13, 0.23, 0.96] }}
         className="h-[2px] bg-white rounded-full"
         style={{ filter: 'drop-shadow(0 0 4px rgba(255,255,255,0.8))' }}
@@ -39,8 +39,8 @@ export default function HamburgerMenu({ isOpen, onClick }: HamburgerMenuProps) {
       <motion.div
         animate={
           isOpen
-            ? { rotate: -45, y: -8, width: '20px' }
-            : { rotate: 0, y: 0, width: '20px' }
+            ? { rotate: -45, y: -8, width: '18px' }
+            : { rotate: 0, y: 0, width: '18px' }
         }
         transition={{ duration: 0.3, ease: [0.43, 0.13, 0.23, 0.96] }}
         className="h-[2px] bg-white rounded-full origin-center"

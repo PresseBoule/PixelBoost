@@ -1003,6 +1003,10 @@
     cursor: pointer;
   }
 
+  .touch-manipulation {
+    touch-action: manipulation;
+  }
+
   .resize {
     resize: both;
   }
@@ -2520,6 +2524,12 @@
   }
 
   @media (width >= 48rem) {
+    .md\:top-8 {
+      top: calc(var(--spacing) * 8);
+    }
+  }
+
+  @media (width >= 48rem) {
     .md\:top-12 {
       top: calc(var(--spacing) * 12);
     }
@@ -2540,6 +2550,12 @@
   @media (width >= 48rem) {
     .md\:bottom-16 {
       bottom: calc(var(--spacing) * 16);
+    }
+  }
+
+  @media (width >= 48rem) {
+    .md\:left-8 {
+      left: calc(var(--spacing) * 8);
     }
   }
 
@@ -2574,6 +2590,12 @@
   }
 
   @media (width >= 48rem) {
+    .md\:h-14 {
+      height: calc(var(--spacing) * 14);
+    }
+  }
+
+  @media (width >= 48rem) {
     .md\:h-16 {
       height: calc(var(--spacing) * 16);
     }
@@ -2588,6 +2610,12 @@
   @media (width >= 48rem) {
     .md\:w-7 {
       width: calc(var(--spacing) * 7);
+    }
+  }
+
+  @media (width >= 48rem) {
+    .md\:w-14 {
+      width: calc(var(--spacing) * 14);
     }
   }
 
@@ -2906,8 +2934,36 @@ body {
   overflow-x: hidden;
 }
 
-a, button, input, textarea, select {
-  cursor: none !important;
+@media (pointer: coarse) {
+  body {
+    cursor: auto !important;
+  }
+
+  a, button, input, textarea, select {
+    cursor: pointer !important;
+  }
+}
+
+@media (pointer: fine) {
+  a, button, input, textarea, select {
+    cursor: none !important;
+  }
+}
+
+@media (width <= 768px) {
+  button, a {
+    -webkit-tap-highlight-color: #ffffff1a;
+    touch-action: manipulation;
+  }
+
+  input, textarea, select {
+    font-size: 16px !important;
+  }
+}
+
+.touch-manipulation {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: #ffffff1a;
 }
 
 .perspective-1000 {

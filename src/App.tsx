@@ -4,6 +4,7 @@ import { PixelBoostSite } from './components/PixelBoostSite';
 import Loader from './components/Loader';
 import CustomCursor from './components/CustomCursor';
 import { SEOHead } from './components/SEOHead';
+import { ResponsiveOptimizations } from './components/ResponsiveOptimizations';
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -11,6 +12,7 @@ export default function App() {
   return (
     <>
       <SEOHead />
+      <ResponsiveOptimizations />
       <CustomCursor />
       <AnimatePresence mode="wait">
         {isLoading && (

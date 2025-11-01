@@ -29,15 +29,6 @@ const projects = [
     image: 'https://images.unsplash.com/photo-1700155007323-1e4f4e58d627?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxnYW1pbmclMjBjb25zb2xlJTIwdGVjaG5vbG9neXxlbnwxfHx8fDE3NjE3NDk3MjV8MA&ixlib=rb-4.1.0&q=80&w=1080',
     link: 'https://console-nexus.netlify.app/',
     year: '2025',
-  },
-  {
-    id: 4,
-    title: 'Application SaaS',
-    category: 'Application',
-    description: 'Dashboard avec data visualization moderne.',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop',
-    link: '#',
-    year: '2025',
   }
 ];
 

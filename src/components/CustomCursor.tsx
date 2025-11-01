@@ -7,8 +7,24 @@ export default function CustomCursor() {
   const [isHovering, setIsHovering] = useState(false);
   const [isInPortfolio, setIsInPortfolio] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
 
   useEffect(() => {
+    // Détecter si c'est un appareil tactile
+    const checkTouchDevice = () => {
+      return (
+        'ontouchstart' in window ||
+        navigator.maxTouchPoints > 0 ||
+        window.matchMedia('(pointer: coarse)').matches
+      );
+    };
+    
+    setIsTouchDevice(checkTouchDevice());
+    
+    // Si c'est un appareil tactile, ne pas afficher le curseur custom
+    if (checkTouchDevice()) {
+      return;
+    }
     let animationFrameId: number;
     let trailFrameId: number;
     
@@ -73,7 +89,8 @@ export default function CustomCursor() {
     };
   }, []);
 
-  if (!isVisible) return null;
+  // Ne pas afficher sur les appareils tactiles
+  if (!isVisible || isTouchDevice) return null;
 
   const cursorSize = isHovering ? 40 : 20;
 
