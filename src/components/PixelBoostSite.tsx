@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform, useSpring } from 'motion/react';
 import { CentralObject3D } from './CentralObject3D';
 import { DynamicBackground } from './DynamicBackground';
 import { Mail, Phone, MapPin, Instagram, Facebook } from 'lucide-react';
+import TikTokIcon from './TikTokIcon';
 import HamburgerMenu from './HamburgerMenu';
 import MenuOverlay from './MenuOverlay';
 import { DecomposingText } from './DecomposingText';
@@ -114,11 +115,12 @@ export function PixelBoostSite() {
       const scrollTop = window.scrollY;
       const viewportHeight = window.innerHeight;
       const sectionCount = baseSections.length;
+      const isMobile = window.innerWidth < 768;
       
       // Le portfolio commence après 3 sections (hero, services, portfolio-intro)
       const portfolioStartScroll = viewportHeight * 3;
-      // Le portfolio fait 800vh de haut
-      const portfolioHeight = viewportHeight * 8;
+      // Le portfolio fait 500vh sur mobile (facilite la sortie), 800vh sur desktop
+      const portfolioHeight = viewportHeight * (isMobile ? 5 : 8);
       const portfolioEndScroll = portfolioStartScroll + portfolioHeight;
       
       // Si on est dans le portfolio, rester sur l'index portfolio-intro (2)
@@ -277,44 +279,44 @@ export function PixelBoostSite() {
       <motion.nav
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 3.2, duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
-        className="fixed top-0 left-0 right-0 z-50 px-8 md:px-12 py-6 md:py-8 mix-blend-difference"
+        transition={{ delay: 1.7, duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
+        className="fixed top-0 left-0 right-0 z-50 px-4 md:px-8 lg:px-12 py-4 md:py-6 lg:py-8 mix-blend-difference"
       >
         {/* Ligne de scan qui traverse la nav */}
         <motion.div
           className="absolute left-0 right-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-white/50 to-transparent"
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
-          transition={{ delay: 3.2, duration: 0.6 }}
+          transition={{ delay: 1.7, duration: 0.6 }}
         />
         
         <div className="flex items-center justify-between">
-          <div className="w-14" /> {/* Spacer pour le hamburger menu */}
+          <div className="w-12 md:w-14" /> {/* Spacer pour le hamburger menu */}
           <motion.button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="text-white text-lg md:text-xl tracking-tight"
+            className="text-white text-base md:text-lg lg:text-xl tracking-tight"
             initial={{ opacity: 0, letterSpacing: '0.5em' }}
             animate={{ opacity: 1, letterSpacing: '-0.025em' }}
-            transition={{ delay: 3.4, duration: 0.6 }}
+            transition={{ delay: 1.9, duration: 0.6 }}
           >
             PixelBoost
           </motion.button>
-          <div className="w-14" /> {/* Spacer pour équilibrer */}
+          <div className="w-12 md:w-14" /> {/* Spacer pour équilibrer */}
         </div>
       </motion.nav>
 
-      {/* Navigation dots */}
-      <div className="fixed right-8 md:right-12 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-4 mix-blend-difference">
+      {/* Navigation dots - cachés sur mobile */}
+      <div className="hidden md:flex fixed right-4 md:right-8 lg:right-12 top-1/2 -translate-y-1/2 z-50 flex-col gap-4 mix-blend-difference">
         {baseSections.map((section, index) => (
           <motion.button
             key={section.id}
             onClick={() => window.scrollTo({ top: window.innerHeight * index, behavior: 'smooth' })}
-            className={`w-2 h-2 rounded-full transition-all duration-300 ${
+            className={`w-2 h-2 rounded-full transition-all duration-300 touch-manipulation ${
               currentSection === index ? 'bg-white scale-150' : 'bg-white/30'
             }`}
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: currentSection === index ? 1 : 0.3, x: 0 }}
-            transition={{ delay: 3.3 + index * 0.08, duration: 0.4 }}
+            transition={{ delay: 1.8 + index * 0.08, duration: 0.4 }}
           />
         ))}
       </div>
@@ -327,7 +329,7 @@ export function PixelBoostSite() {
         />
       </div>
 
-      {/* Sections avec contenu alternant gauche/droite */}
+      {/* Sections content */}
       {sections.map((section, index) => {
         const sectionStart = index / sections.length;
         const sectionEnd = (index + 1) / sections.length;
@@ -339,7 +341,11 @@ export function PixelBoostSite() {
           <Fragment key={`${section.id}-${index}`}>
             <section
               id={section.id}
-              className="relative h-screen flex items-center"
+              className={`relative flex items-center ${
+                section.id === 'tarifs' || section.id === 'contact' 
+                  ? 'min-h-[150vh] md:min-h-screen py-16 md:py-20' 
+                  : 'h-screen'
+              }`}
             >
             <motion.div
               style={{
@@ -406,28 +412,12 @@ export function PixelBoostSite() {
                     viewport={{ once: true }}
                     style={{
                       backgroundImage: `
-                        linear-gradient(white 1px, transparent 1px),
-                        linear-gradient(90deg, white 1px, transparent 1px)
+                        linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px)
                       `,
-                      backgroundSize: '40px 40px',
+                      backgroundSize: '80px 80px',
                     }}
                   />
-
-                  {/* Cercles concentriques */}
-                  {[...Array(3)].map((_, i) => (
-                    <motion.div
-                      key={i}
-                      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 border border-white/5 rounded-full"
-                      style={{
-                        width: `${200 + i * 150}px`,
-                        height: `${200 + i * 150}px`,
-                      }}
-                      initial={{ scale: 0, opacity: 0 }}
-                      whileInView={{ scale: 1, opacity: 1 }}
-                      transition={{ delay: i * 0.2, duration: 1, ease: 'easeOut' }}
-                      viewport={{ once: true }}
-                    />
-                  ))}
 
                   <motion.h2 
                     className="text-[12vw] md:text-[10vw] lg:text-[8vw] leading-[0.9] tracking-tighter text-white mb-8 relative z-10"
@@ -543,20 +533,13 @@ export function PixelBoostSite() {
 
                         {/* Texte avec effet de matérialisation */}
                         <motion.span 
-                          className="text-xl md:text-2xl text-white/70 relative"
+                          className="text-xl md:text-2xl text-white/70 relative transition-colors duration-300 group-hover:text-white/90"
                           initial={{ opacity: 0, filter: 'blur(5px)' }}
                           whileInView={{ opacity: 1, filter: 'blur(0px)' }}
                           transition={{ delay: i * 0.1 + 0.4, duration: 0.5 }}
                           viewport={{ once: true }}
                         >
                           {item}
-                          
-                          {/* Effet de scan sur hover */}
-                          <motion.div
-                            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100"
-                            animate={{ x: ['-100%', '200%'] }}
-                            transition={{ duration: 1.5, ease: 'linear', repeat: Infinity }}
-                          />
                         </motion.span>
                       </motion.div>
                     ))}
@@ -566,7 +549,7 @@ export function PixelBoostSite() {
 
               {/* Tarifs Section */}
               {section.id === 'tarifs' && (
-                <div className="relative">
+                <div className="relative w-full">
                   {/* Hexagone en arrière-plan */}
                   <motion.div
                     className="absolute right-0 top-1/2 -translate-y-1/2 w-96 h-96 opacity-[0.02]"
@@ -620,7 +603,7 @@ export function PixelBoostSite() {
                     </div>
                   </motion.div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-6xl ml-auto">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl ml-auto">
                     {section.packages?.map((pkg, i) => (
                       <motion.div
                         key={i}
@@ -676,7 +659,7 @@ export function PixelBoostSite() {
                         }`} />
 
                         {/* Card content */}
-                        <div className={`relative border backdrop-blur-sm p-8 transition-all duration-300 ${
+                        <div className={`relative border backdrop-blur-sm p-6 md:p-8 transition-all duration-300 ${
                           pkg.popular 
                             ? 'border-white/30' 
                             : 'border-white/10 group-hover:border-white/20'
@@ -704,7 +687,7 @@ export function PixelBoostSite() {
                           </div>
 
                           {/* Features */}
-                          <div className="space-y-4">
+                          <div className="space-y-4 mb-8">
                             {pkg.features.map((feature, j) => (
                               <motion.div 
                                 key={j}
@@ -723,18 +706,24 @@ export function PixelBoostSite() {
                           </div>
 
                           {/* CTA Button */}
-                          <div className="flex justify-center mt-8">
+                          <div className="flex justify-center">
                             <motion.button
                               onClick={() => setSelectedPackage({ name: pkg.name, price: pkg.price })}
                               whileHover={{ scale: 1.05 }}
                               whileTap={{ scale: 0.95 }}
-                              className={`px-8 py-3 rounded-sm text-xs uppercase tracking-widest transition-all duration-300 ${
-                                pkg.popular
-                                  ? 'bg-white text-black hover:bg-white/90'
-                                  : 'bg-white/5 text-white border border-white/20 hover:bg-white/10 hover:border-white/30'
-                              }`}
+                              className="relative group/btn w-full overflow-hidden border border-white/20 hover:border-white/40 px-6 py-3 transition-all duration-300"
                             >
-                              Choisir
+                              {/* Background gradient animé */}
+                              <motion.div
+                                className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0"
+                                initial={{ x: '-100%' }}
+                                whileHover={{ x: '100%' }}
+                                transition={{ duration: 0.6 }}
+                              />
+                              
+                              <span className="relative z-10 text-sm text-white uppercase tracking-wider">
+                                Choisir
+                              </span>
                             </motion.button>
                           </div>
                         </div>
@@ -746,8 +735,8 @@ export function PixelBoostSite() {
 
               {/* Contact Section */}
               {section.id === 'contact' && (
-                <div className="relative">
-                  {/* Lignes de convergence vers le centre */}
+                <div className="relative w-full">
+                  {/* Cercles concentriques en arrière-plan */}
                   {[...Array(12)].map((_, i) => {
                     const angle = (360 / 12) * i;
                     const length = 400;
@@ -885,51 +874,53 @@ export function PixelBoostSite() {
                         <span className="text-sm text-white/70 relative z-10">PixelBoost</span>
                       </motion.a>
 
-                      <motion.div
+                      <motion.a
+                        href="https://www.tiktok.com/@pixelboost2"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.8, duration: 0.6 }}
                         viewport={{ once: true }}
-                        className="flex flex-col items-center justify-center gap-3 text-white/60 border border-white/10 p-5 rounded-sm relative"
+                        whileHover={{ scale: 1.02, y: -2 }}
+                        className="flex flex-col items-center justify-center gap-3 text-white border border-white/20 hover:border-white/40 p-5 rounded-sm transition-colors relative overflow-hidden group"
                       >
-                        <MapPin className="w-5 h-5" />
-                        <span className="text-sm">France</span>
+                        <motion.div
+                          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent"
+                          initial={{ x: '-100%' }}
+                          whileHover={{ x: '200%' }}
+                          transition={{ duration: 0.8 }}
+                        />
+                        <TikTokIcon className="w-5 h-5 relative z-10" />
+                        <span className="text-sm text-white/70 relative z-10">@pixelboost2</span>
+                      </motion.a>
+
+                      <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.85, duration: 0.6 }}
+                        viewport={{ once: true }}
+                        className="flex flex-col items-center justify-center gap-3 text-white border border-white/20 p-5 rounded-sm relative overflow-hidden"
+                      >
+                        <MapPin className="w-5 h-5 relative z-10" />
+                        <span className="text-sm text-white/70 relative z-10">Bordeaux, FR</span>
                       </motion.div>
                     </div>
+
+                    {/* Footer */}
+                    <motion.div
+                      className="text-center text-white/30 text-xs mt-16"
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      transition={{ delay: 1, duration: 0.8 }}
+                      viewport={{ once: true }}
+                    >
+                      © 2025 PixelBoost. Tous droits réservés.
+                    </motion.div>
                   </div>
                 </div>
               )}
-
-              {/* Numéro de section avec effet de matérialisation */}
-              <motion.div
-                className={`absolute top-8 text-[20vw] md:text-[15vw] opacity-[0.03] leading-none pointer-events-none ${
-                  section.align === 'right' ? 'right-0 pr-8' : 'left-0 pl-8'
-                }`}
-                initial={{ opacity: 0, scale: 0.8, filter: 'blur(10px)' }}
-                whileInView={{ opacity: 0.03, scale: 1, filter: 'blur(0px)' }}
-                transition={{ duration: 1, ease: 'easeOut' }}
-                viewport={{ once: true }}
-              >
-                {String(index + 1).padStart(2, '0')}
-              </motion.div>
             </motion.div>
-
-            {/* Indicateur de scroll pour la première section */}
-            {index === 0 && (
-              <motion.div
-                style={{
-                  opacity: useTransform(smoothProgress, [0, 0.1], [1, 0])
-                }}
-                className="absolute bottom-12 md:bottom-16 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
-              >
-                <span className="text-xs text-white/30 uppercase tracking-widest">Scroll</span>
-                <motion.div
-                  animate={{ y: [0, 10, 0] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                  className="w-[1px] h-12 bg-gradient-to-b from-white/50 to-transparent"
-                />
-              </motion.div>
-            )}
           </section>
           
           {/* Insérer PortfolioSection après Portfolio Intro */}
@@ -976,48 +967,38 @@ export function PixelBoostSite() {
               </div>
             </>
           )}
-          </Fragment>
+        </Fragment>
         );
       })}
 
-      {/* Footer */}
-      <div className="fixed bottom-6 md:bottom-8 left-8 md:left-12 z-50 text-white/20 text-xs mix-blend-difference">
-        © 2025 PixelBoost
-      </div>
-
-      {/* Package Selection Dialog */}
-      <PackageSelectionDialog
-        isOpen={selectedPackage !== null && !showPaymentPage && !showDiscussionForm}
-        onClose={() => setSelectedPackage(null)}
-        packageName={selectedPackage?.name || ''}
-        packagePrice={selectedPackage?.price || ''}
-        onChooseDiscuss={() => {
-          setShowDiscussionForm(true);
-        }}
-        onChoosePayment={() => {
-          setShowPaymentPage(true);
-        }}
-      />
-
-      {/* Discussion Form */}
-      {showDiscussionForm && selectedPackage && (
-        <DiscussionForm
+      {/* Dialogs et overlays */}
+      {selectedPackage && !showPaymentPage && !showDiscussionForm && (
+        <PackageSelectionDialog
           packageName={selectedPackage.name}
           packagePrice={selectedPackage.price}
-          onBack={() => {
-            setShowDiscussionForm(false);
+          onClose={() => setSelectedPackage(null)}
+          onSelectPayNow={() => setShowPaymentPage(true)}
+          onSelectDiscussion={() => setShowDiscussionForm(true)}
+        />
+      )}
+
+      {showPaymentPage && selectedPackage && (
+        <PaymentPage
+          packageName={selectedPackage.name}
+          packagePrice={selectedPackage.price}
+          onClose={() => {
+            setShowPaymentPage(false);
             setSelectedPackage(null);
           }}
         />
       )}
 
-      {/* Payment Page */}
-      {showPaymentPage && selectedPackage && (
-        <PaymentPage
+      {showDiscussionForm && selectedPackage && (
+        <DiscussionForm
           packageName={selectedPackage.name}
           packagePrice={selectedPackage.price}
-          onBack={() => {
-            setShowPaymentPage(false);
+          onClose={() => {
+            setShowDiscussionForm(false);
             setSelectedPackage(null);
           }}
         />
@@ -1027,11 +1008,11 @@ export function PixelBoostSite() {
       {showMentionsLegales && (
         <MentionsLegales onClose={() => setShowMentionsLegales(false)} />
       )}
-      
+
       {showPolitiqueConfidentialite && (
         <PolitiqueConfidentialite onClose={() => setShowPolitiqueConfidentialite(false)} />
       )}
-      
+
       {showCGV && (
         <CGV onClose={() => setShowCGV(false)} />
       )}

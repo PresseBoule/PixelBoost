@@ -38,7 +38,9 @@ export function DynamicBackground({ scrollProgress }: DynamicBackgroundProps) {
     }
 
     const particles: Particle[] = [];
-    const particleCount = 120; // Compromis entre 80 et 200
+    // Détection mobile pour ultra optimisation
+    const isMobile = window.innerWidth < 768;
+    const particleCount = isMobile ? 40 : 60; // Réduit drastiquement pour performances
 
     for (let i = 0; i < particleCount; i++) {
       particles.push({
@@ -73,18 +75,18 @@ export function DynamicBackground({ scrollProgress }: DynamicBackgroundProps) {
         const twinkle = Math.sin(particle.twinklePhase) * 0.3 + 0.7;
         const opacity = particle.opacity * twinkle;
 
-        // Particule avec petit halo (seulement pour les plus grosses)
-        if (particle.size > 1.5) {
+        // Particule avec petit halo - optimisé (seulement pour les plus grosses)
+        if (particle.size > 1.8) {
           const gradient = ctx.createRadialGradient(
             particle.x, particle.y, 0,
-            particle.x, particle.y, particle.size * 4
+            particle.x, particle.y, particle.size * 3
           );
-          gradient.addColorStop(0, `rgba(255, 255, 255, ${opacity * 0.6})`);
-          gradient.addColorStop(0.5, `rgba(255, 255, 255, ${opacity * 0.2})`);
+          gradient.addColorStop(0, `rgba(255, 255, 255, ${opacity * 0.5})`);
+          gradient.addColorStop(0.6, `rgba(255, 255, 255, ${opacity * 0.15})`);
           gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
           ctx.fillStyle = gradient;
           ctx.beginPath();
-          ctx.arc(particle.x, particle.y, particle.size * 4, 0, Math.PI * 2);
+          ctx.arc(particle.x, particle.y, particle.size * 3, 0, Math.PI * 2);
           ctx.fill();
         }
 

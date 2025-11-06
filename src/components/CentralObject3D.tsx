@@ -31,15 +31,16 @@ export function CentralObject3D({ scrollProgress }: CentralObject3DProps) {
     let time = 0;
 
     const draw = () => {
-      time += 0.005;
+      time += 0.003; // Ralenti pour optimisation
 
       ctx.clearRect(0, 0, window.innerWidth, window.innerHeight * 3);
 
       const centerX = window.innerWidth / 2;
       const totalHeight = window.innerHeight * 3;
       
-      // Paramètres spirale simple
-      const numPoints = 300;
+      // Paramètres spirale simple - ultra optimisé
+      const isMobile = window.innerWidth < 768;
+      const numPoints = isMobile ? 120 : 150; // Réduit pour optimisation mobile
       const amplitude = 200; // Amplitude horizontale
       const frequency = 3; // Nombre de vagues
 
@@ -90,23 +91,26 @@ export function CentralObject3D({ scrollProgress }: CentralObject3DProps) {
       ctx.lineWidth = 2;
       ctx.stroke();
 
-      // Particules espacées le long de la ligne
-      for (let i = 0; i < points.length; i += 20) {
+      // Particules espacées le long de la ligne - ultra optimisé
+      const particleSpacing = isMobile ? 30 : 20;
+      for (let i = 0; i < points.length; i += particleSpacing) {
         const p = points[i];
         const pulse = Math.sin(time * 2 + i * 0.1) * 0.3 + 0.7;
         const size = (2 + p.scale) * pulse;
         const opacity = 0.5 * pulse;
 
-        // Halo doux
-        const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, size * 6);
-        gradient.addColorStop(0, `rgba(255, 255, 255, ${opacity})`);
-        gradient.addColorStop(0.5, `rgba(255, 255, 255, ${opacity * 0.3})`);
-        gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
-        
-        ctx.fillStyle = gradient;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, size * 6, 0, Math.PI * 2);
-        ctx.fill();
+        // Halo doux - simplifié sur mobile
+        if (!isMobile) {
+          const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, size * 5);
+          gradient.addColorStop(0, `rgba(255, 255, 255, ${opacity})`);
+          gradient.addColorStop(0.5, `rgba(255, 255, 255, ${opacity * 0.3})`);
+          gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+          
+          ctx.fillStyle = gradient;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, size * 5, 0, Math.PI * 2);
+          ctx.fill();
+        }
 
         // Point
         ctx.fillStyle = `rgba(255, 255, 255, ${opacity * 1.5})`;

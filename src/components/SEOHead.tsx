@@ -241,7 +241,8 @@ export function SEOHead({
       ],
       "sameAs": [
         "https://www.instagram.com/pixel.boost.web/",
-        "https://www.facebook.com/profile.php?id=61579858910169"
+        "https://www.facebook.com/profile.php?id=61579858910169",
+        "https://www.tiktok.com/@pixelboost2"
       ]
     };
 

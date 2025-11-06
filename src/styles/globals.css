@@ -192,6 +192,9 @@ html {
 body {
   overflow-x: hidden;
   cursor: none;
+  /* Performance optimizations */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Afficher le curseur normal sur les appareils tactiles */
@@ -230,6 +233,17 @@ body {
 .touch-manipulation {
   touch-action: manipulation;
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Portfolio responsive height */
+.portfolio-container {
+  height: 500vh;
+}
+
+@media (min-width: 768px) {
+  .portfolio-container {
+    height: 800vh;
+  }
 }
 
 /* Classes utilitaires pour les animations 3D */

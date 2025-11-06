@@ -29,6 +29,15 @@ const projects = [
     image: 'https://images.unsplash.com/photo-1700155007323-1e4f4e58d627?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxnYW1pbmclMjBjb25zb2xlJTIwdGVjaG5vbG9neXxlbnwxfHx8fDE3NjE3NDk3MjV8MA&ixlib=rb-4.1.0&q=80&w=1080',
     link: 'https://console-nexus.netlify.app/',
     year: '2025',
+  },
+  {
+    id: 4,
+    title: 'Les Gîtes du Soulor',
+    category: 'Vitrine',
+    description: 'Site vitrine authentique pour des gîtes de montagne dans les Pyrénées.',
+    image: 'https://images.unsplash.com/photo-1509973372076-d88f6f8ba1b9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb3VudGFpbiUyMGxvZGdlJTIwY2hhbGV0fGVufDF8fHx8MTc2MjEwMjgyNXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral',
+    link: 'http://lesgitesdusoulor.fr/',
+    year: '2025',
   }
 ];
 
@@ -37,27 +46,58 @@ export function PortfolioSection() {
   const [currentProject, setCurrentProject] = useState(0);
   const [direction, setDirection] = useState(0); // -1 pour gauche, 1 pour droite
   const manualNavigationTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const isScrollingRef = useRef<NodeJS.Timeout | null>(null);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"]
   });
 
-  // Smooth spring pour des animations ultra fluides - ouverture normale
+  // Smooth spring ultra optimisé pour performances
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 30,
-    damping: 35,
-    mass: 2
+    stiffness: 20,
+    damping: 25,
+    mass: 2,
+    restDelta: 0.001
   });
+
+  // Détecter le scroll manuel pour bloquer le listener automatique
+  useEffect(() => {
+    const handleScroll = () => {
+      // Annuler le timeout précédent
+      if (isScrollingRef.current) {
+        clearTimeout(isScrollingRef.current);
+      }
+
+      // Bloquer le listener automatique pendant le scroll manuel
+      isScrollingRef.current = setTimeout(() => {
+        isScrollingRef.current = null;
+      }, 200); // Débounce de 200ms
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('wheel', handleScroll, { passive: true });
+    window.addEventListener('touchmove', handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('wheel', handleScroll);
+      window.removeEventListener('touchmove', handleScroll);
+      if (isScrollingRef.current) {
+        clearTimeout(isScrollingRef.current);
+      }
+    };
+  }, []);
 
   // Suivre le projet actuel basé sur le scroll (UNIQUEMENT si pas de navigation manuelle active)
   useEffect(() => {
     return smoothProgress.on("change", (latest) => {
       // Ne rien faire si une navigation manuelle est en cours
-      if (manualNavigationTimeoutRef.current) return;
+      if (manualNavigationTimeoutRef.current || isScrollingRef.current) return;
       
-      if (latest > 0.1 && latest < 0.85) {
-        const projectProgress = (latest - 0.1) / 0.75;
+      // Zone active étendue de 0.1 à 0.90 pour plus d'espace avant la fermeture
+      if (latest > 0.1 && latest < 0.90) {
+        const projectProgress = (latest - 0.1) / 0.80;
         const index = Math.floor(projectProgress * projects.length);
         setCurrentProject(Math.max(0, Math.min(index, projects.length - 1)));
       }
@@ -74,13 +114,15 @@ export function PortfolioSection() {
     }
     
     const container = containerRef.current;
-    const totalHeight = 800; // 800vh total
+    // Détecter si on est sur mobile ou desktop
+    const isMobile = window.innerWidth < 768;
+    const totalHeight = isMobile ? 500 : 800; // 500vh mobile, 800vh desktop
     const viewportHeight = window.innerHeight;
     const totalScrollHeight = (totalHeight / 100) * viewportHeight;
     
-    // Calculer la position de scroll pour ce projet
-    const projectProgressStart = 0.1 + (projectIndex / projects.length) * 0.75;
-    const projectProgressMiddle = projectProgressStart + (0.75 / projects.length) / 2;
+    // Zone active étendue de 0.1 à 0.90
+    const projectProgressStart = 0.1 + (projectIndex / projects.length) * 0.80;
+    const projectProgressMiddle = projectProgressStart + (0.80 / projects.length) / 2;
     
     // Convertir en position de scroll absolue
     const targetScrollProgress = projectProgressMiddle;
@@ -99,7 +141,7 @@ export function PortfolioSection() {
     // pour couvrir le smooth scroll ET le smoothing du spring
     manualNavigationTimeoutRef.current = setTimeout(() => {
       manualNavigationTimeoutRef.current = null;
-    }, 1500); // Augmenté pour couvrir tout le spring smoothing
+    }, 2500); // Augmenté à 2500ms pour plus de stabilité
   };
 
   const nextProject = () => {
@@ -120,31 +162,31 @@ export function PortfolioSection() {
 
   // Animation fluide en 3 phases :
   // Phase 1 (0-0.1): ENTRÉE FUTURISTE - Cadre se matérialise avec effets holographiques
-  // Phase 2 (0.1-0.85): Cadre rectangulaire PLEIN ÉCRAN, projets défilent un par un (TRÈS LENT)
-  // Phase 3 (0.85-1): Cadre rétrécit avec effets de départ PROGRESSIFS ET LENTS
+  // Phase 2 (0.1-0.90): Cadre rectangulaire PLEIN ÉCRAN, projets défilent un par un (TRÈS LENT)
+  // Phase 3 (0.90-1): Cadre rétrécit avec effets de départ PROGRESSIFS ET LENTS
   
   const frameWidth = useTransform(
     smoothProgress,
-    [0, 0.03, 0.08, 0.1, 0.85, 0.90, 0.95, 1],
+    [0, 0.03, 0.08, 0.1, 0.90, 0.94, 0.97, 1],
     ['10vw', '40vw', '80vw', '100vw', '100vw', '80vw', '40vw', '10vw']
   );
 
   const frameHeight = useTransform(
     smoothProgress,
-    [0, 0.03, 0.08, 0.1, 0.85, 0.90, 0.95, 1],
+    [0, 0.03, 0.08, 0.1, 0.90, 0.94, 0.97, 1],
     ['10vh', '40vh', '80vh', '100vh', '100vh', '80vh', '40vh', '10vh']
   );
 
   const frameOpacity = useTransform(
     smoothProgress,
-    [0, 0.03, 0.08, 0.85, 0.93, 1],
+    [0, 0.03, 0.08, 0.90, 0.96, 1],
     [0, 0.7, 1, 1, 0.4, 0]
   );
 
   // Rotation pour l'entrée
   const frameRotate = useTransform(
     smoothProgress,
-    [0, 0.1, 0.85, 1],
+    [0, 0.1, 0.90, 1],
     [180, 0, 0, -180]
   );
 
@@ -157,7 +199,7 @@ export function PortfolioSection() {
 
   const glowIntensity = useTransform(
     smoothProgress,
-    [0, 0.05, 0.1, 0.85, 0.93, 1],
+    [0, 0.05, 0.1, 0.90, 0.96, 1],
     [0, 1, 0.5, 0.5, 1, 0]
   );
 
@@ -171,8 +213,7 @@ export function PortfolioSection() {
     <div 
       ref={containerRef}
       id="portfolio"
-      className="relative"
-      style={{ height: '800vh' }}
+      className="relative portfolio-container"
       data-section="portfolio"
     >
       {/* Container sticky plein écran */}
@@ -419,7 +460,7 @@ export function PortfolioSection() {
               <motion.div 
                 className="absolute top-0 left-0 right-0 p-8 md:p-12 z-30 bg-gradient-to-b from-white/80 to-transparent"
                 style={{
-                  opacity: useTransform(smoothProgress, [0.08, 0.12, 0.82, 0.87], [0, 1, 1, 0])
+                  opacity: useTransform(smoothProgress, [0.08, 0.12, 0.87, 0.92], [0, 1, 1, 0])
                 }}
               >
                 <h2 className="text-6xl md:text-8xl lg:text-9xl text-black tracking-tighter mb-2">
@@ -434,7 +475,7 @@ export function PortfolioSection() {
               <motion.div 
                 className="absolute top-8 md:top-12 right-8 md:right-12 z-30"
                 style={{
-                  opacity: useTransform(smoothProgress, [0.08, 0.12, 0.82, 0.87], [0, 1, 1, 0])
+                  opacity: useTransform(smoothProgress, [0.08, 0.12, 0.87, 0.92], [0, 1, 1, 0])
                 }}
               >
                 <div className="text-right">
@@ -451,7 +492,7 @@ export function PortfolioSection() {
               <motion.div 
                 className="absolute top-1/2 -translate-y-1/2 left-8 md:left-12 z-30"
                 style={{
-                  opacity: useTransform(smoothProgress, [0.08, 0.12, 0.82, 0.87], [0, 1, 1, 0])
+                  opacity: useTransform(smoothProgress, [0.08, 0.12, 0.87, 0.92], [0, 1, 1, 0])
                 }}
               >
                 <motion.button
@@ -486,7 +527,7 @@ export function PortfolioSection() {
               <motion.div 
                 className="absolute top-1/2 -translate-y-1/2 right-8 md:right-12 z-30"
                 style={{
-                  opacity: useTransform(smoothProgress, [0.08, 0.12, 0.82, 0.87], [0, 1, 1, 0])
+                  opacity: useTransform(smoothProgress, [0.08, 0.12, 0.87, 0.92], [0, 1, 1, 0])
                 }}
               >
                 <motion.button
@@ -660,14 +701,14 @@ export function PortfolioSection() {
               <motion.div 
                 className="absolute bottom-8 left-1/2 -translate-x-1/2 w-64 md:w-96 z-30"
                 style={{
-                  opacity: useTransform(smoothProgress, [0.08, 0.12, 0.82, 0.87], [0, 1, 1, 0])
+                  opacity: useTransform(smoothProgress, [0.08, 0.12, 0.87, 0.92], [0, 1, 1, 0])
                 }}
               >
                 <div className="relative h-1 bg-black/30 overflow-hidden">
                   <motion.div
                     className="absolute h-full bg-black"
                     style={{
-                      width: useTransform(smoothProgress, [0.15, 0.80], ['0%', '100%'])
+                      width: useTransform(smoothProgress, [0.15, 0.87], ['0%', '100%'])
                     }}
                   />
                 </div>
@@ -725,13 +766,31 @@ export function PortfolioSection() {
             />
           ))}
         </motion.div>
+
+        {/* Indicateur de scroll pour sortir du portfolio - Mobile uniquement */}
+        <motion.div
+          className="md:hidden absolute bottom-8 left-1/2 -translate-x-1/2 z-40 flex flex-col items-center gap-2"
+          style={{
+            opacity: useTransform(smoothProgress, [0.75, 0.80, 0.90, 0.94], [0, 1, 1, 0])
+          }}
+        >
+          <div className="text-white/60 text-xs uppercase tracking-widest mb-2">
+            Continuez à scroller
+          </div>
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <ChevronRight className="w-6 h-6 text-white/60 rotate-90" />
+          </motion.div>
+        </motion.div>
       </div>
 
       {/* Transition lumineuse qui se prolonge après la fermeture du cadre */}
       <motion.div
         className="absolute inset-0 pointer-events-none"
         style={{
-          opacity: useTransform(smoothProgress, [0.85, 0.93, 1], [0.8, 0.4, 0]),
+          opacity: useTransform(smoothProgress, [0.90, 0.96, 1], [0.8, 0.4, 0]),
           background: 'radial-gradient(circle at center, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 30%, transparent 60%)',
           filter: 'blur(60px)',
         }}

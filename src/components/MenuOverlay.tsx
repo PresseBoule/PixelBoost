@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from 'motion/react';
 import { X, Instagram, Facebook, Mail } from 'lucide-react';
+import TikTokIcon from './TikTokIcon';
 
 interface MenuOverlayProps {
   isOpen: boolean;
@@ -27,6 +28,7 @@ export default function MenuOverlay({ isOpen, onClose, onOpenMentionsLegales, on
   const socialLinks = [
     { icon: Instagram, label: 'Instagram', href: 'https://www.instagram.com/pixel.boost.web/' },
     { icon: Facebook, label: 'Facebook', href: 'https://www.facebook.com/profile.php?id=61579858910169&locale=fr_FR' },
+    { icon: TikTokIcon, label: 'TikTok', href: 'https://www.tiktok.com/@pixelboost2' },
     { icon: Mail, label: 'Email', href: 'mailto:pixelboost22@gmail.com' },
   ];
 

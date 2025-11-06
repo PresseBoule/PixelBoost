@@ -9,9 +9,26 @@ interface DecomposingTextProps {
 export const DecomposingText = ({ text, className = '' }: DecomposingTextProps) => {
   const [mousePos, setMousePos] = useState<{ x: number; y: number } | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    // Détecter mobile et désactiver l'effet
+    setIsMobile(window.innerWidth < 768);
+    
+    // Ne pas ajouter les listeners sur mobile
+    if (window.innerWidth < 768) {
+      return;
+    }
+
+    // Throttle pour ultra performance
+    let lastTime = 0;
+    const throttleDelay = 16; // 60fps max
+
     const handleMouseMove = (e: MouseEvent) => {
+      const now = performance.now();
+      if (now - lastTime < throttleDelay) return;
+      lastTime = now;
+
       if (containerRef.current) {
         const rect = containerRef.current.getBoundingClientRect();
         setMousePos({
@@ -47,6 +64,7 @@ export const DecomposingText = ({ text, className = '' }: DecomposingTextProps) 
             index={index}
             mousePos={mousePos}
             containerRef={containerRef}
+            isMobile={isMobile}
           />
         );
       })}
@@ -59,9 +77,10 @@ interface CharFilamentProps {
   index: number;
   mousePos: { x: number; y: number } | null;
   containerRef: React.RefObject<HTMLDivElement>;
+  isMobile: boolean;
 }
 
-const CharFilament = ({ char, index, mousePos, containerRef }: CharFilamentProps) => {
+const CharFilament = ({ char, index, mousePos, containerRef, isMobile }: CharFilamentProps) => {
   const charRef = useRef<HTMLSpanElement>(null);
   const [charPosition, setCharPosition] = useState<{ x: number; y: number } | null>(null);
 
@@ -84,6 +103,11 @@ const CharFilament = ({ char, index, mousePos, containerRef }: CharFilamentProps
     return () => window.removeEventListener('resize', updatePosition);
   }, [containerRef]);
 
+  // Sur mobile, pas d'effet du tout
+  if (isMobile) {
+    return <span className="inline-block text-white">{char === ' ' ? '\u00A0' : char}</span>;
+  }
+
   // Calculer la distance et l'intensité
   let distance = 1000;
   let intensity = 0;
@@ -100,17 +124,17 @@ const CharFilament = ({ char, index, mousePos, containerRef }: CharFilamentProps
     intensity = Math.max(0, Math.min(1, 1 - distance / activationRadius));
   }
 
-  // Créer 8 filaments autour de la lettre
-  const filaments = Array.from({ length: 8 }, (_, i) => {
-    const angle = (i / 8) * Math.PI * 2;
-    const dist = 15 * intensity;
+  // Créer seulement 4 filaments autour de la lettre pour ultra performance
+  const filaments = Array.from({ length: 4 }, (_, i) => {
+    const angle = (i / 4) * Math.PI * 2;
+    const dist = 12 * intensity;
     
     return {
       x: Math.cos(angle) * dist,
       y: Math.sin(angle) * dist,
-      opacity: 0.6 - (i * 0.05),
-      scale: 1 - (i * 0.08),
-      blur: i * 0.3
+      opacity: 0.5 - (i * 0.08),
+      scale: 1 - (i * 0.12),
+      blur: i * 0.4
     };
   });
 
@@ -143,7 +167,7 @@ const CharFilament = ({ char, index, mousePos, containerRef }: CharFilamentProps
         {char}
       </motion.span>
 
-      {/* Filaments de décomposition */}
+      {/* Filaments de décomposition - Réduits pour performance */}
       {filaments.map((filament, i) => (
         <motion.span
           key={i}
@@ -158,94 +182,13 @@ const CharFilament = ({ char, index, mousePos, containerRef }: CharFilamentProps
             scale: isDecomposed ? filament.scale : 1,
           }}
           transition={{
-            duration: 0.3,
-            ease: "easeOut",
-            delay: i * 0.01
-          }}
-        >
-          {char}
-        </motion.span>
-      ))}
-
-      {/* Filaments supplémentaires plus fins et plus loin */}
-      {isDecomposed && [...Array(4)].map((_, i) => {
-        const angle = (i / 4) * Math.PI * 2 + Math.PI / 4;
-        const dist = 25 * intensity;
-        
-        return (
-          <motion.span
-            key={`outer-${i}`}
-            className="absolute inset-0 text-white/30 pointer-events-none"
-            style={{
-              filter: `blur(${2 + i * 0.5}px)`,
-            }}
-            initial={{ opacity: 0 }}
-            animate={{
-              opacity: 0.4 * intensity,
-              x: Math.cos(angle) * dist,
-              y: Math.sin(angle) * dist,
-              scale: 0.7,
-            }}
-            transition={{
-              duration: 0.35,
-              ease: "easeOut",
-              delay: 0.05 + i * 0.015
-            }}
-          >
-            {char}
-          </motion.span>
-        );
-      })}
-
-      {/* Effet de glow central */}
-      {isDecomposed && (
-        <motion.span
-          className="absolute inset-0 text-white pointer-events-none"
-          style={{
-            filter: 'blur(4px)',
-          }}
-          initial={{ opacity: 0, scale: 1 }}
-          animate={{
-            opacity: 0.5 * intensity,
-            scale: 1.2,
-          }}
-          transition={{
-            duration: 0.3,
+            duration: 0.2,
             ease: "easeOut"
           }}
         >
           {char}
         </motion.span>
-      )}
-
-      {/* Particules fines */}
-      {isDecomposed && [...Array(6)].map((_, i) => {
-        const angle = (i / 6) * Math.PI * 2;
-        const dist = 20 * intensity;
-        
-        return (
-          <motion.div
-            key={`particle-${i}`}
-            className="absolute w-[1px] h-[1px] bg-white/70 rounded-full pointer-events-none"
-            style={{
-              left: '50%',
-              top: '50%',
-            }}
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{
-              opacity: 0.8 * intensity,
-              scale: 1,
-              x: Math.cos(angle) * dist,
-              y: Math.sin(angle) * dist,
-            }}
-            transition={{
-              duration: 0.3,
-              ease: "easeOut",
-              delay: i * 0.02
-            }}
-          />
-        );
-      })}
+      ))}
     </span>
   );
 };

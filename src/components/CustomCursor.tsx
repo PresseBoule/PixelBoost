@@ -31,8 +31,16 @@ export default function CustomCursor() {
     // Position cible pour le trail
     let targetX = 0;
     let targetY = 0;
+    
+    // Throttle pour mousemove - ultra fluide
+    let lastTime = 0;
+    const throttleDelay = 8; // 120fps max
 
     const updateMousePosition = (e: MouseEvent) => {
+      const now = performance.now();
+      if (now - lastTime < throttleDelay) return;
+      lastTime = now;
+      
       setIsVisible(true);
       targetX = e.clientX;
       targetY = e.clientY;
@@ -41,14 +49,18 @@ export default function CustomCursor() {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
 
-    // Animation du trail avec lerp pour un effet de trainée fluide
+    // Animation du trail avec lerp pour un effet de trainée fluide - optimisé
     const animateTrail = () => {
       setTrailPosition((prev) => {
         const dx = targetX - prev.x;
         const dy = targetY - prev.y;
+        // Arrêter l'animation si le mouvement est négligeable
+        if (Math.abs(dx) < 0.1 && Math.abs(dy) < 0.1) {
+          return prev;
+        }
         return {
-          x: prev.x + dx * 0.15, // Facteur de lissage
-          y: prev.y + dy * 0.15,
+          x: prev.x + dx * 0.2, // Augmenté pour plus de réactivité
+          y: prev.y + dy * 0.2,
         };
       });
       trailFrameId = requestAnimationFrame(animateTrail);
@@ -96,146 +108,62 @@ export default function CustomCursor() {
 
   return (
     <>
-      {/* Effet de trail/trainée */}
+      {/* Effet de trail/trainée - Ultra optimisé */}
       <div
         className="pointer-events-none fixed top-0 left-0 z-[99997]"
         style={{
-          transform: `translate(${trailPosition.x}px, ${trailPosition.y}px)`,
-          willChange: 'transform',
+          transform: `translate3d(${trailPosition.x}px, ${trailPosition.y}px, 0)`,
         }}
       >
-        <motion.div
-          className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full"
-          animate={{
-            backgroundColor: isInPortfolio ? 'rgba(0, 0, 0, 0.08)' : 'rgba(255, 255, 255, 0.08)',
-          }}
-          transition={{ duration: 0.3 }}
+        <div
+          className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full transition-colors duration-300"
           style={{
-            width: '60px',
-            height: '60px',
-            filter: 'blur(15px)',
+            width: '50px',
+            height: '50px',
+            filter: 'blur(12px)',
+            backgroundColor: isInPortfolio ? 'rgba(0, 0, 0, 0.06)' : 'rgba(255, 255, 255, 0.06)',
           }}
         />
       </div>
 
-      {/* Cercle externe avec double bordure pour contraste */}
+      {/* Cercle externe - Simplifié */}
       <div
         className="pointer-events-none fixed top-0 left-0 z-[99998]"
         style={{
-          transform: `translate(${mousePosition.x}px, ${mousePosition.y}px)`,
-          willChange: 'transform',
+          transform: `translate3d(${mousePosition.x}px, ${mousePosition.y}px, 0)`,
         }}
       >
-        <motion.div
-          className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full"
-          animate={{
-            width: cursorSize,
-            height: cursorSize,
-            borderColor: isInPortfolio ? '#000000' : '#ffffff',
-          }}
-          transition={{ 
-            width: { type: 'spring', stiffness: 500, damping: 30 },
-            height: { type: 'spring', stiffness: 500, damping: 30 },
-            borderColor: { duration: 0.3 }
-          }}
+        <div
+          className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full transition-all duration-150 ease-out"
           style={{
+            width: `${cursorSize}px`,
+            height: `${cursorSize}px`,
             borderWidth: '2px',
             borderStyle: 'solid',
+            borderColor: isInPortfolio ? '#000000' : '#ffffff',
             backgroundColor: 'transparent',
-            boxShadow: isInPortfolio
-              ? isHovering
-                ? '0 0 30px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(0, 0, 0, 0.2)'
-                : '0 0 15px rgba(0, 0, 0, 0.3)'
-              : isHovering
-                ? '0 0 30px rgba(255, 255, 255, 0.5), inset 0 0 15px rgba(255, 255, 255, 0.2)'
-                : '0 0 15px rgba(255, 255, 255, 0.3)',
-            transition: 'box-shadow 0.3s ease',
           }}
         />
       </div>
 
-      {/* Point central avec double bordure pour contraste */}
+      {/* Point central - Simplifié */}
       <div
         className="pointer-events-none fixed top-0 left-0 z-[99999]"
         style={{
-          transform: `translate(${mousePosition.x}px, ${mousePosition.y}px)`,
-          willChange: 'transform',
+          transform: `translate3d(${mousePosition.x}px, ${mousePosition.y}px, 0)`,
         }}
       >
-        <motion.div
-          className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full"
-          animate={{
-            backgroundColor: isInPortfolio ? '#000000' : '#ffffff',
-            borderColor: isInPortfolio ? '#ffffff' : '#000000',
-          }}
-          transition={{ duration: 0.3 }}
+        <div
+          className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full transition-colors duration-150"
           style={{
-            width: '8px',
-            height: '8px',
-            border: '2px solid',
-            boxShadow: isInPortfolio 
-              ? '0 0 15px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 0, 0, 0.5)' 
-              : '0 0 15px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.5)',
+            width: '6px',
+            height: '6px',
+            backgroundColor: isInPortfolio ? '#000000' : '#ffffff',
           }}
         />
       </div>
 
-      {/* Particules périphériques avec double couleur */}
-      {isHovering && (
-        <>
-          {[...Array(4)].map((_, i) => {
-            const angle = (i * Math.PI) / 2;
-            const distance = 25;
-            const particleX = mousePosition.x + Math.cos(angle) * distance * (i % 2 === 0 ? 1 : -1);
-            const particleY = mousePosition.y + Math.sin(angle) * distance * (i % 2 === 0 ? 1 : -1);
-            
-            return (
-              <div
-                key={i}
-                className="pointer-events-none fixed top-0 left-0 z-[99996]"
-                style={{
-                  transform: `translate(${mousePosition.x}px, ${mousePosition.y}px)`,
-                  willChange: 'transform',
-                }}
-              >
-                <motion.div
-                  className="absolute -translate-x-1/2 -translate-y-1/2"
-                  initial={{ opacity: 0, scale: 0, x: 0, y: 0 }}
-                  animate={{
-                    opacity: [0, 1, 0],
-                    scale: [0, 1, 0],
-                    x: [0, Math.cos(angle) * distance],
-                    y: [0, Math.sin(angle) * distance],
-                  }}
-                  transition={{
-                    duration: 1,
-                    repeat: Infinity,
-                    delay: i * 0.1,
-                    ease: "easeInOut",
-                  }}
-                >
-                  <motion.div
-                    className="rounded-full"
-                    animate={{
-                      backgroundColor: isInPortfolio ? '#000000' : '#ffffff',
-                      borderColor: isInPortfolio ? '#ffffff' : '#000000',
-                    }}
-                    transition={{ duration: 0.3 }}
-                    style={{
-                      width: '4px',
-                      height: '4px',
-                      border: '1px solid',
-                      boxShadow: isInPortfolio 
-                        ? '0 0 8px rgba(0, 0, 0, 0.8)' 
-                        : '0 0 8px rgba(255, 255, 255, 0.8)',
-                    }}
-                  />
-                </motion.div>
-              </div>
-            );
-          })}
-        </>
-      )}
+      {/* Particules périphériques - Supprimées pour optimisation */}
     </>
   );
 }
