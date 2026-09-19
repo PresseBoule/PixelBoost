@@ -4,6 +4,7 @@ import { AnimatePresence } from 'motion/react';
 import { router } from './routes';
 import Loader from './components/Loader';
 import CustomCursor from './components/CustomCursor';
+import PixelBoostAgent from './components/PixelBoostAgent';
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -16,7 +17,10 @@ export default function App() {
           <Loader key="loader" onComplete={() => setIsLoading(false)} />
         )}
       </AnimatePresence>
-      {!isLoading && <RouterProvider router={router} />}
+      {!isLoading && <>
+        <RouterProvider router={router} />
+        <PixelBoostAgent />
+      </>}
     </>
   );
 }
