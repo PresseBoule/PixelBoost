@@ -1,5 +1,7 @@
 const MAX_MESSAGES = 12;
 const MAX_MESSAGE_LENGTH = 2_000;
+const MAX_REQUESTS_PER_MINUTE = 12;
+const requestCounts = new Map();
 
 const knowledge = `
 PIXELBOOST — BASE DE CONNAISSANCES
@@ -49,9 +51,19 @@ function extractText(response) {
     .join('');
 }
 
+function isRateLimited(request) {
+  const now = Date.now();
+  const client = request.headers.get('x-nf-client-connection-ip') || request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
+  const recent = (requestCounts.get(client) ?? []).filter((timestamp) => now - timestamp < 60_000);
+  recent.push(now);
+  requestCounts.set(client, recent);
+  return recent.length > MAX_REQUESTS_PER_MINUTE;
+}
+
 export default async (request) => {
   if (request.method !== 'POST') return json(405, { error: 'Méthode non autorisée.' });
   if (!process.env.OPENAI_API_KEY) return json(503, { error: "L'assistant est en cours de configuration. Réessayez dans quelques instants." });
+  if (isRateLimited(request)) return json(429, { error: 'Vous avez envoyé plusieurs messages rapidement. Réessayez dans une minute.' });
 
   try {
     const body = await request.json();
@@ -91,7 +103,11 @@ export default async (request) => {
     }
 
     const reply = extractText(response).trim();
-    return json(200, { reply: reply || "Je n'ai pas réussi à formuler une réponse. Écrivez-nous à pixelboost22@gmail.com." });
+    if (!reply) {
+      console.error('OpenAI returned no visible text:', response.status);
+      return json(502, { error: "L'assistant n'a pas pu finaliser sa réponse. Réessayez dans un instant." });
+    }
+    return json(200, { reply });
   } catch (error) {
     console.error('Chat function error:', error);
     return json(500, { error: "Une erreur temporaire s'est produite. Réessayez ou contactez PixelBoost." });

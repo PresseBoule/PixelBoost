@@ -1,5 +1,5 @@
 import { FormEvent, useEffect, useRef, useState } from 'react';
-import { Bot, ChevronDown, LoaderCircle, MessageCircle, Send, Sparkles, X } from 'lucide-react';
+import { ChevronDown, LoaderCircle, MessageCircle, RotateCcw, Send, Sparkles, X } from 'lucide-react';
 
 type Message = { role: 'assistant' | 'user'; content: string };
 
@@ -21,9 +21,22 @@ export default function PixelBoostAgent() {
   const [loading, setLoading] = useState(false);
   const endRef = useRef<HTMLDivElement>(null);
 
+  const projectBrief = messages
+    .filter((message) => message.role === 'user')
+    .slice(-6)
+    .map((message) => `- ${message.content}`)
+    .join('\n');
+  const contactUrl = `/contact?brief=${encodeURIComponent(projectBrief.slice(0, 1800))}`;
+
   useEffect(() => {
     if (open) endRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, loading, open]);
+
+  useEffect(() => {
+    const openAgent = () => setOpen(true);
+    window.addEventListener('pixelboost:open-agent', openAgent);
+    return () => window.removeEventListener('pixelboost:open-agent', openAgent);
+  }, []);
 
   async function sendMessage(message: string) {
     const content = message.trim();
@@ -72,7 +85,10 @@ export default function PixelBoostAgent() {
                 <p className="text-[11px] text-muted-foreground">Assistant IA · Répond en quelques secondes</p>
               </div>
             </div>
-            <button onClick={() => setOpen(false)} className="p-2 text-muted-foreground hover:text-foreground" aria-label="Fermer l'assistant"><X size={18} /></button>
+            <div className="flex items-center gap-1">
+              <button onClick={() => { setMessages([welcome]); setInput(''); }} className="p-2 text-muted-foreground hover:text-foreground" aria-label="Recommencer la conversation"><RotateCcw size={15} /></button>
+              <button onClick={() => setOpen(false)} className="p-2 text-muted-foreground hover:text-foreground" aria-label="Fermer l'assistant"><X size={18} /></button>
+            </div>
           </header>
 
           <div className="flex-1 overflow-y-auto p-4 space-y-3">
@@ -97,8 +113,8 @@ export default function PixelBoostAgent() {
           </div>
 
           <div className="border-t border-border p-3 bg-background">
-            <a href="/contact" className="mb-3 flex items-center justify-between border border-border px-3 py-2 text-xs text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors">
-              Parler de mon projet <ChevronDown size={13} className="-rotate-90" />
+            <a href={contactUrl} className="mb-3 flex items-center justify-between border border-border px-3 py-2 text-xs text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors">
+              {projectBrief ? 'Préparer ma demande' : 'Parler de mon projet'} <ChevronDown size={13} className="-rotate-90" />
             </a>
             <form onSubmit={handleSubmit} className="flex gap-2">
               <label className="sr-only" htmlFor="pixelboost-agent-input">Votre message</label>

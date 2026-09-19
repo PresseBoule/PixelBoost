@@ -91,6 +91,7 @@ export default function AgentIAPage() {
 
   useEffect(() => {
     document.title = 'Agent IA pour site web | PixelBoost';
+    window.dispatchEvent(new Event('pixelboost:open-agent'));
   }, []);
 
   return (

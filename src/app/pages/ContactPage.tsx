@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
+import { useLocation } from 'react-router';
 import { Mail, Phone, ArrowRight } from 'lucide-react';
 
 const fadeUp = {
@@ -17,6 +18,7 @@ const projectTypes = [
 ];
 
 export default function ContactPage() {
+  const { search } = useLocation();
   const [formData, setFormData] = useState({
     name: '',
     company: '',
@@ -31,6 +33,11 @@ export default function ContactPage() {
     document.title = 'Contact | PixelBoost';
   }, []);
 
+  useEffect(() => {
+    const brief = new URLSearchParams(search).get('brief');
+    if (brief) setFormData((current) => ({ ...current, message: brief }));
+  }, [search]);
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
@@ -39,6 +46,19 @@ export default function ContactPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const body = [
+      'Bonjour PixelBoost,',
+      '',
+      'Voici mon besoin :',
+      formData.message,
+      '',
+      `Nom : ${formData.name}`,
+      `Entreprise : ${formData.company}`,
+      `Email : ${formData.email}`,
+      `Site web : ${formData.website || 'Non renseigné'}`,
+      `Type de projet : ${formData.projectType}`,
+    ].join('\n');
+    window.location.href = `mailto:pixelboost22@gmail.com?subject=${encodeURIComponent('Nouveau projet PixelBoost')}&body=${encodeURIComponent(body)}`;
     setSubmitted(true);
   };
 
@@ -198,7 +218,7 @@ export default function ContactPage() {
                     type="submit"
                     className="inline-flex items-center gap-2 font-['Chakra_Petch',monospace] text-sm tracking-wider text-background bg-foreground px-6 py-3.5 hover:bg-foreground/85 transition-colors"
                   >
-                    Parler de mon projet
+                    Préparer mon email
                     <ArrowRight size={15} />
                   </button>
                 </form>

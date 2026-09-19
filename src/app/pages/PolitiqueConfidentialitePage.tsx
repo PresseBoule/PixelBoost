@@ -48,6 +48,9 @@ export default function PolitiqueConfidentialitePage() {
                   </li>
                 ))}
               </ul>
+              <p className="mt-4">
+                Lorsque vous échangez avec Nova, l'assistante IA, le contenu de vos messages est transmis au prestataire technique de génération de réponses afin de répondre à votre demande. Évitez d'y saisir des informations sensibles, confidentielles ou de paiement.
+              </p>
             </section>
 
             <section>
@@ -81,7 +84,7 @@ export default function PolitiqueConfidentialitePage() {
               <p>
                 Vos données ne sont jamais vendues ni transmises à des tiers à des fins commerciales.
                 Elles peuvent être partagées avec des prestataires techniques dans le cadre de la
-                réalisation de votre projet, sous contrat de confidentialité.
+                réalisation de votre projet, sous contrat de confidentialité. Pour le fonctionnement de Nova, les messages sont traités par le prestataire de modèle de langage uniquement pour générer la réponse demandée.
               </p>
             </section>
 
