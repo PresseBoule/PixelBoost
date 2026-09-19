@@ -42,12 +42,11 @@ function json(statusCode, body) {
 
 function extractText(response) {
   if (response.output_text) return response.output_text;
-  return response.output
-    ?.filter((item) => item.type === 'message')
-    .flatMap((item) => item.content ?? [])
-    .filter((part) => part.type === 'output_text')
-    .map((part) => part.text)
-    .join('') ?? '';
+  return (response.output ?? [])
+    .flatMap((item) => item.content ?? [item])
+    .map((part) => part.text ?? part.value ?? '')
+    .filter((text) => typeof text === 'string')
+    .join('');
 }
 
 export default async (request) => {
@@ -76,7 +75,8 @@ export default async (request) => {
       body: JSON.stringify({
         model: process.env.OPENAI_MODEL || 'gpt-5',
         store: false,
-        max_output_tokens: 450,
+        max_output_tokens: 700,
+        reasoning: { effort: 'low' },
         input: [
           { role: 'developer', content: instructions },
           ...safeMessages,
