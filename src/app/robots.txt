@@ -1,0 +1,16 @@
+# robots.txt pour PixelBoost
+# Autorise tous les robots d'exploration
+
+User-agent: *
+Allow: /
+
+# Empêche l'indexation des ressources inutiles
+Disallow: /api/
+Disallow: /*.json$
+Disallow: /*.xml$
+
+# Sitemap
+Sitemap: https://pixelboost.fr/sitemap.xml
+
+# Délai entre les requêtes (facultatif, en secondes)
+Crawl-delay: 1
