@@ -15,21 +15,21 @@ const conversations = [
     label: 'Découverte des gîtes',
     messages: [
       { role: 'user', text: 'Quels gîtes proposez-vous ?' },
-      { role: 'agent', text: "Nous proposons plusieurs hébergements dans le Val d'Azun : Le Soum (4 pers.), Le Suyen (6 pers.), et Le Pibeste (2 pers.). Lequel vous intéresse ?" },
+      { role: 'agent', text: "Nous proposons quatre gîtes : Le Soum, Le Tech, Le Suyen et L’Estaing. Chacun accueille 3 personnes maximum. Lequel vous intéresse ?" },
     ],
   },
   {
     label: 'Règles & conditions',
     messages: [
       { role: 'user', text: 'Les animaux sont-ils acceptés ?' },
-      { role: 'agent', text: "Les chiens sont acceptés au Soum et au Suyen, avec un supplément de 5 €/nuit et sous conditions. Les chats ne sont pas acceptés dans les gîtes. Souhaitez-vous d'autres précisions ?" },
+      { role: 'agent', text: "Les animaux ne sont pas admis dans les gîtes." },
     ],
   },
   {
     label: 'Disponibilités',
     messages: [
       { role: 'user', text: 'Le Suyen est-il disponible du 12 au 14 octobre ?' },
-      { role: 'agent', text: "Je consulte les disponibilités… Le Suyen est libre sur ces dates. Le tarif pour 2 nuits est de 280 €. Souhaitez-vous que je vous aide à initier une réservation ?" },
+      { role: 'agent', text: "Pour vérifier les disponibilités du Suyen, pouvez-vous préciser l’année du séjour ?" },
     ],
   },
   {
@@ -65,12 +65,12 @@ function ConvBlock({ conv }: { conv: typeof conversations[0] }) {
 }
 
 const agentInfo = [
-  { title: "Présentation des hébergements", text: "Le Soum, Le Suyen, Le Pibeste — l'agent connaît les capacités, équipements et spécificités de chaque gîte." },
-  { title: "Tarifs & conditions", text: "Tarifs par nuit selon la saison, conditions d'annulation, règles de l'établissement, suppléments." },
-  { title: "Disponibilités connectées", text: "Lorsque les calendriers sont synchronisés, l'agent peut indiquer en temps réel si un hébergement est libre." },
+  { title: "Présentation des hébergements", text: "Le Soum, Le Tech, Le Suyen et L’Estaing : quatre gîtes pour 3 personnes maximum chacun." },
+  { title: "Tarifs & conditions", text: "Tarifs selon la saison de chaque nuit, conditions d’annulation et règles de l’établissement." },
+  { title: "Disponibilités connectées", text: "L’agent consulte les calendriers du site et d’Airbnb pour la période demandée. Si une source est indisponible, il ne confirme pas de disponibilité." },
   { title: "Équipements & prestations", text: "Équipements de cuisine, literie, wifi, espace bien-être, accès extérieur, parkings." },
-  { title: "Informations pratiques", text: "Accès, horaires d'arrivée et de départ, contacts d'urgence, informations locales." },
-  { title: "Orientation & qualification", text: "L'agent aide le visiteur à choisir le bon gîte selon ses besoins et recueille les informations avant contact." },
+  { title: "Informations pratiques", text: "Accès, horaires d’arrivée et de départ, coordonnées du gérant et informations locales." },
+  { title: "Orientation & qualification", text: "L’agent oriente le visiteur vers la page de réservation ou le gérant. Il ne confirme pas de réservation dans le chat." },
 ];
 
 export default function CasClientPage() {
@@ -145,7 +145,7 @@ export default function CasClientPage() {
               <p className="font-['JetBrains_Mono',monospace] text-xs text-muted-foreground uppercase tracking-widest mb-4">Le client</p>
               <h3 className="font-['Chakra_Petch',monospace] text-lg text-foreground mb-3">Les Gîtes du Soulor</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                Hébergements touristiques dans le Val d'Azun, Hautes-Pyrénées. Plusieurs gîtes ruraux accueillant des familles et des randonneurs tout au long de l'année.
+                Quatre gîtes de 3 personnes maximum chacun, situés à Arrens-Marsous, dans le Val d’Azun, Hautes-Pyrénées.
               </p>
             </motion.div>
             <motion.div
@@ -214,7 +214,7 @@ export default function CasClientPage() {
       <section className="py-28 px-6 md:px-10 border-t border-border">
         <div className="max-w-7xl mx-auto">
           <motion.p {...fadeUp} className="text-xs font-['JetBrains_Mono',monospace] text-muted-foreground tracking-[0.2em] uppercase mb-4">
-            Exemples de conversations
+            Exemples illustratifs de conversations
           </motion.p>
           <motion.h2
             {...fadeUp}

@@ -257,7 +257,7 @@ export default function AgentIAPage() {
               Vous voulez voir ça en vrai ?
             </h2>
             <p className="text-muted-foreground text-sm max-w-md">
-              Consultez le cas client Les Gîtes du Soulor — un agent en production avec de vrais exemples de conversations.
+              Consultez le cas client Les Gîtes du Soulor — un agent en production, présenté avec des exemples illustratifs de conversations.
             </p>
           </div>
           <div className="flex flex-wrap gap-4 shrink-0">

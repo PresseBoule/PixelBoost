@@ -14,12 +14,12 @@ const chatMessages = [
   { role: 'user', text: 'Avez-vous des disponibilités ce week-end ?' },
   {
     role: 'agent',
-    text: "Oui. Le Gîte Le Soum est disponible du vendredi au dimanche. Souhaitez-vous que je vous donne les détails tarifaires ?",
+    text: "Quelles sont vos dates d’arrivée et de départ, avec l’année ? Je pourrai ensuite vérifier les calendriers.",
   },
   { role: 'user', text: 'Quels sont les tarifs ?' },
   {
     role: 'agent',
-    text: "Le Soum est à 120 €/nuit pour 2 personnes. Je peux vous aider à initier une réservation si vous le souhaitez.",
+    text: "Les tarifs vont de 150 à 180 € pour une nuit seule, et de 125 à 150 €/nuit dès deux nuits, selon la saison.",
   },
 ];
 
@@ -59,7 +59,7 @@ function ChatDemo() {
       <div className="flex items-center gap-2 pb-3 border-b border-border">
         <div className="w-2 h-2 rounded-full bg-foreground/30" />
         <span className="text-xs font-['JetBrains_Mono',monospace] text-muted-foreground tracking-wider">
-          Agent PixelBoost — Les Gîtes du Soulor
+          Exemple — Les Gîtes du Soulor
         </span>
       </div>
       <div className="space-y-3 min-h-[180px]">
@@ -466,9 +466,10 @@ export default function HomePage() {
               transition={{ delay: 0.1 }}
               className="bg-card border border-border p-6 space-y-4"
             >
+              <p className="text-xs text-muted-foreground">Exemples illustratifs de conversations</p>
               {[
-                { u: 'Les animaux sont-ils acceptés ?', a: "Les chiens sont acceptés dans certains gîtes sous conditions. Le Soum et Le Suyen les acceptent, avec un supplément de 5 €/nuit. Souhaitez-vous des précisions ?" },
-                { u: 'Le Suyen est-il disponible du 12 au 14 octobre ?', a: "Je vérifie les disponibilités… Le Suyen est libre sur ces dates. Souhaitez-vous que je vous indique comment réserver ?" },
+                { u: 'Les animaux sont-ils acceptés ?', a: "Les animaux ne sont pas admis dans les gîtes." },
+                { u: 'Le Suyen est-il disponible du 12 au 14 octobre ?', a: "Pour vérifier les disponibilités du Suyen, pouvez-vous préciser l’année du séjour ?" },
               ].map((msg, i) => (
                 <div key={i} className="space-y-2">
                   <div className="flex justify-end">
