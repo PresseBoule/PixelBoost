@@ -3,11 +3,13 @@ import { Outlet, Link, NavLink, useLocation } from 'react-router';
 import { AnimatePresence, motion } from 'motion/react';
 import { Menu, X, Mail, Phone, Instagram, Facebook, ArrowUpRight } from 'lucide-react';
 import TikTokIcon from './TikTokIcon';
+import { SEOHead } from './SEOHead';
 
 const navLinks = [
+  { to: '/creation-sites-web', label: 'Sites web' },
   { to: '/agent-ia', label: 'Agent IA' },
   { to: '/fonctionnement', label: 'Fonctionnement' },
-  { to: '/tarifs', label: 'Tarifs' },
+  { to: '/tarifs', label: 'Offres' },
   { to: '/cas-client', label: 'Cas client' },
   { to: '/realisations', label: 'Réalisations' },
   { to: '/contact', label: 'Contact' },
@@ -17,6 +19,15 @@ export default function Layout() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const { pathname } = useLocation();
+  const pageSeo: Record<string, { title: string; description: string }> = {
+    '/': { title: 'PixelBoost | Sites web et assistants IA', description: 'Sites web professionnels et assistants IA sur mesure pour les entreprises.' },
+    '/creation-sites-web': { title: 'Création de sites web professionnels | PixelBoost', description: 'Sites vitrines modernes, responsive et pensés pour faciliter la prise de contact.' },
+    '/agent-ia': { title: 'Assistant IA pour site web | PixelBoost', description: 'Des assistants IA personnalisés pour répondre aux visiteurs et qualifier les demandes.' },
+    '/tarifs': { title: 'Offres sur devis | PixelBoost', description: 'Site web, assistant IA ou solution combinée : chaque projet PixelBoost est étudié sur devis.' },
+    '/realisations': { title: 'Réalisations web et IA | PixelBoost', description: 'Découvrez les réalisations PixelBoost, dont le projet Les Gîtes du Soulor.' },
+    '/contact': { title: 'Demander un devis | PixelBoost', description: 'Parlez-nous de votre projet de site web ou d’assistant IA.' },
+  };
+  const seo = pageSeo[pathname] ?? { title: 'PixelBoost | Sites web et assistants IA', description: 'Sites web professionnels et assistants IA sur mesure pour les entreprises.' };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -36,6 +47,7 @@ export default function Layout() {
 
   return (
     <div className="min-h-screen bg-background text-foreground font-['DM_Sans',sans-serif]">
+      <SEOHead title={seo.title} description={seo.description} />
       {/* Header */}
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${

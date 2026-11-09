@@ -11,10 +11,9 @@ const fadeUp = {
 };
 
 const projectTypes = [
-  'Ajouter un agent à mon site',
-  'Automatiser certaines demandes',
-  'Refaire mon site + agent',
-  'Je ne sais pas encore',
+  'Site web',
+  'Assistant IA',
+  'Site web + Assistant IA',
 ];
 
 export default function ContactPage() {
@@ -23,8 +22,11 @@ export default function ContactPage() {
     name: '',
     company: '',
     email: '',
+    phone: '',
+    hasWebsite: '',
     website: '',
     projectType: '',
+    budget: '',
     message: '',
   });
   const [submitted, setSubmitted] = useState(false);
@@ -55,8 +57,11 @@ export default function ContactPage() {
       `Nom : ${formData.name}`,
       `Entreprise : ${formData.company}`,
       `Email : ${formData.email}`,
-      `Site web : ${formData.website || 'Non renseigné'}`,
+      `Téléphone : ${formData.phone || 'Non renseigné'}`,
+      `Possède déjà un site : ${formData.hasWebsite || 'Non renseigné'}`,
+      `URL du site : ${formData.website || 'Non renseignée'}`,
       `Type de projet : ${formData.projectType}`,
+      `Budget indicatif : ${formData.budget || 'Non renseigné'}`,
     ].join('\n');
     window.location.href = `mailto:pixelboost22@gmail.com?subject=${encodeURIComponent('Nouveau projet PixelBoost')}&body=${encodeURIComponent(body)}`;
     setSubmitted(true);
@@ -106,10 +111,10 @@ export default function ContactPage() {
             >
               {submitted ? (
                 <div className="py-20 text-center">
-                  <p className="font-['JetBrains_Mono',monospace] text-xs text-muted-foreground tracking-widest uppercase mb-4">Envoyé</p>
-                  <h2 className="font-['Chakra_Petch',monospace] text-3xl text-foreground mb-4">Merci pour votre message.</h2>
+                  <p className="font-['JetBrains_Mono',monospace] text-xs text-muted-foreground tracking-widest uppercase mb-4">Brouillon prêt</p>
+                  <h2 className="font-['Chakra_Petch',monospace] text-3xl text-foreground mb-4">Votre demande est prête à envoyer.</h2>
                   <p className="text-muted-foreground text-sm max-w-sm mx-auto">
-                    Nous revenons vers vous sous 24 à 48h ouvrées.
+                    Votre application e-mail a ouvert un brouillon. Envoyez-le pour transmettre votre demande à PixelBoost.
                   </p>
                 </div>
               ) : (
@@ -145,6 +150,12 @@ export default function ContactPage() {
                         placeholder="Nom de votre entreprise"
                       />
                     </div>
+                    <div>
+                      <label htmlFor="phone" className="block text-xs font-['JetBrains_Mono',monospace] text-muted-foreground tracking-wider uppercase mb-2">
+                        Téléphone <span className="normal-case text-muted-foreground/50 tracking-normal">(optionnel)</span>
+                      </label>
+                      <input id="phone" name="phone" type="tel" value={formData.phone} onChange={handleChange} className="w-full bg-secondary border border-border text-foreground text-sm px-4 py-3 focus:outline-none focus:border-foreground/40 transition-colors placeholder:text-muted-foreground" placeholder="06 12 34 56 78" />
+                    </div>
                   </div>
 
                   <div className="grid md:grid-cols-2 gap-6">
@@ -162,6 +173,14 @@ export default function ContactPage() {
                         className="w-full bg-secondary border border-border text-foreground text-sm px-4 py-3 focus:outline-none focus:border-foreground/40 transition-colors placeholder:text-muted-foreground"
                         placeholder="vous@exemple.fr"
                       />
+                    </div>
+                    <div>
+                      <label htmlFor="hasWebsite" className="block text-xs font-['JetBrains_Mono',monospace] text-muted-foreground tracking-wider uppercase mb-2">
+                        Possédez-vous déjà un site ?
+                      </label>
+                      <select id="hasWebsite" name="hasWebsite" required value={formData.hasWebsite} onChange={handleChange} className="w-full bg-secondary border border-border text-foreground text-sm px-4 py-3 focus:outline-none focus:border-foreground/40 transition-colors appearance-none cursor-pointer">
+                        <option value="" disabled>Choisissez une option</option><option value="Oui">Oui</option><option value="Non">Non</option>
+                      </select>
                     </div>
                     <div>
                       <label htmlFor="website" className="block text-xs font-['JetBrains_Mono',monospace] text-muted-foreground tracking-wider uppercase mb-2">
@@ -199,8 +218,15 @@ export default function ContactPage() {
                   </div>
 
                   <div>
+                    <label htmlFor="budget" className="block text-xs font-['JetBrains_Mono',monospace] text-muted-foreground tracking-wider uppercase mb-2">
+                      Budget indicatif <span className="normal-case text-muted-foreground/50 tracking-normal">(optionnel)</span>
+                    </label>
+                    <input id="budget" name="budget" value={formData.budget} onChange={handleChange} className="w-full bg-secondary border border-border text-foreground text-sm px-4 py-3 focus:outline-none focus:border-foreground/40 transition-colors placeholder:text-muted-foreground" placeholder="Ex. 1 500 € à 3 000 €" />
+                  </div>
+
+                  <div>
                     <label htmlFor="message" className="block text-xs font-['JetBrains_Mono',monospace] text-muted-foreground tracking-wider uppercase mb-2">
-                      Qu'aimeriez-vous automatiser ? *
+                      Décrivez votre projet *
                     </label>
                     <textarea
                       id="message"
@@ -210,7 +236,7 @@ export default function ContactPage() {
                       value={formData.message}
                       onChange={handleChange}
                       className="w-full bg-secondary border border-border text-foreground text-sm px-4 py-3 focus:outline-none focus:border-foreground/40 transition-colors resize-none placeholder:text-muted-foreground"
-                      placeholder="Décrivez votre activité et ce que vous souhaitez automatiser ou améliorer..."
+                      placeholder="Décrivez votre activité, vos objectifs et ce que vous souhaitez créer ou améliorer..."
                     />
                   </div>
 

@@ -153,26 +153,26 @@ const steps = [
 
 const tiers = [
   {
-    name: 'Agent Essentiel',
-    desc: "Réponses aux questions fréquentes, personnalisation complète, intégration au site.",
-    cta: 'Discuter de ce projet',
+    name: 'Site web professionnel',
+    desc: "Un site clair, responsive et pensé pour transformer les visites en prises de contact.",
+    href: '/creation-sites-web',
   },
   {
-    name: 'Agent Connecté',
-    desc: "Tout l'Essentiel, plus la connexion à vos calendriers, formulaires et bases de données.",
-    cta: 'Discuter de ce projet',
+    name: 'Assistant IA sur votre site',
+    desc: "Un assistant personnalisé pour répondre, orienter et qualifier les demandes sur un site compatible.",
+    href: '/agent-ia',
     featured: true,
   },
   {
-    name: 'Agent Sur mesure',
-    desc: "Workflows avancés, intégrations API, automatisations complexes, canaux multiples.",
-    cta: 'Discuter de ce projet',
+    name: 'Site web + assistant IA',
+    desc: "Une présence en ligne cohérente, avec un agent intégré dès la conception du parcours client.",
+    href: '/contact',
   },
 ];
 
 export default function HomePage() {
   useEffect(() => {
-    document.title = 'Agents IA pour entreprises | PixelBoost';
+    document.title = 'Sites web et assistants IA | PixelBoost';
   }, []);
 
   return (
@@ -188,7 +188,7 @@ export default function HomePage() {
                 transition={{ duration: 0.5, delay: 0.1 }}
                 className="text-xs font-['JetBrains_Mono',monospace] text-muted-foreground tracking-[0.2em] uppercase mb-8"
               >
-                PixelBoost — Agents IA pour entreprises
+                PixelBoost — Sites web & assistants IA
               </motion.p>
 
               <motion.h1
@@ -197,7 +197,7 @@ export default function HomePage() {
                 transition={{ duration: 0.7, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
                 className="font-['Chakra_Petch',monospace] text-[clamp(2.4rem,6vw,5rem)] leading-[1.05] tracking-tight text-foreground mb-6"
               >
-                Des agents IA qui répondent<br className="hidden md:block" /> à vos clients 24h/24.
+                Votre présence en ligne,<br className="hidden md:block" /> plus intelligente.
               </motion.h1>
 
               <motion.p
@@ -206,8 +206,7 @@ export default function HomePage() {
                 transition={{ duration: 0.6, delay: 0.4 }}
                 className="text-muted-foreground text-lg leading-relaxed max-w-xl mb-10"
               >
-                PixelBoost installe des agents intelligents personnalisés pour répondre à vos visiteurs,
-                automatiser certaines demandes et transformer votre site en assistant commercial.
+                Sites web professionnels et assistants IA sur mesure pour développer votre activité et simplifier vos échanges avec vos clients.
               </motion.p>
 
               <motion.div
@@ -217,17 +216,17 @@ export default function HomePage() {
                 className="flex flex-wrap gap-4 mb-8"
               >
                 <Link
-                  to="/agent-ia"
+                  to="/contact"
                   className="inline-flex items-center gap-2 font-['Chakra_Petch',monospace] text-sm tracking-wider text-background bg-foreground px-6 py-3.5 hover:bg-foreground/85 transition-colors"
                 >
-                  Tester l'agent
+                  Demander un devis gratuit
                   <ArrowRight size={15} />
                 </Link>
                 <Link
-                  to="/fonctionnement"
+                  to="/creation-sites-web"
                   className="inline-flex items-center gap-2 text-sm text-muted-foreground border border-border px-6 py-3.5 hover:text-foreground hover:border-foreground/30 transition-colors"
                 >
-                  Voir comment ça fonctionne
+                  Découvrir nos services
                 </Link>
               </motion.div>
 
@@ -543,7 +542,7 @@ export default function HomePage() {
             transition={{ delay: 0.05 }}
             className="font-['Chakra_Petch',monospace] text-[clamp(1.8rem,4vw,3rem)] leading-tight text-foreground mb-4"
           >
-            Choisissez votre niveau.
+            Trois façons de faire évoluer votre présence en ligne.
           </motion.h2>
           <motion.p {...fadeUp} transition={{ delay: 0.1 }} className="text-muted-foreground text-sm mb-16 max-w-lg">
             Chaque entreprise n'a pas les mêmes besoins. Nous définissons ensemble ce qui est réellement utile.
@@ -569,10 +568,10 @@ export default function HomePage() {
                   <p className="text-sm text-muted-foreground leading-relaxed">{t.desc}</p>
                 </div>
                 <Link
-                  to="/tarifs"
+                  to={t.href}
                   className="inline-flex items-center justify-center gap-2 text-sm text-muted-foreground border border-border px-4 py-3 hover:text-foreground hover:border-foreground/30 transition-colors"
                 >
-                  Voir les détails
+                  Découvrir la solution
                   <ArrowRight size={13} />
                 </Link>
               </motion.div>
@@ -581,10 +580,10 @@ export default function HomePage() {
 
           <motion.div {...fadeUp}>
             <Link
-              to="/tarifs"
+              to="/contact"
               className="inline-flex items-center gap-2 text-sm text-muted-foreground border border-border px-5 py-3 hover:text-foreground hover:border-foreground/30 transition-colors"
             >
-              Voir toutes les offres en détail
+              Demander un devis gratuit
               <ArrowRight size={14} />
             </Link>
           </motion.div>

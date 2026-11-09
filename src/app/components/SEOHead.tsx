@@ -12,8 +12,8 @@ interface SEOHeadProps {
 }
 
 export function SEOHead({
-  title = 'PixelBoost - Création Sites Web Bordeaux | Agence Web Gironde',
-  description = 'Agence web à Bordeaux spécialisée dans la création de sites internet modernes et performants. Sites vitrine, e-commerce, applications web sur mesure. Développeur web professionnel sur Bordeaux et la Gironde. Tarifs à partir de 499€. Contact : 07 85 75 90 40',
+  title = 'PixelBoost | Sites web et assistants IA',
+  description = 'PixelBoost conçoit des sites web professionnels et des assistants IA sur mesure pour les entreprises.',
   keywords = 'création site web bordeaux, agence web bordeaux, développeur web bordeaux, site internet bordeaux, création site bordeaux, agence web gironde, développeur web gironde, site vitrine bordeaux, site e-commerce bordeaux, application web bordeaux, webdesigner bordeaux, création site internet bordeaux, développement web bordeaux, agence digitale bordeaux, site internet professionnel bordeaux, création site web nouvelle-aquitaine, freelance web bordeaux, développeur freelance bordeaux',
   ogImage = logoComplete,
   url = 'https://pixelboost.fr'
@@ -184,12 +184,6 @@ export function SEOHead({
         "addressRegion": "Nouvelle-Aquitaine",
         "postalCode": "33000"
       },
-      "priceRange": "499€-999€",
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "5",
-        "reviewCount": "10"
-      },
       "areaServed": [
         {
           "@type": "City",
@@ -215,29 +209,6 @@ export function SEOHead({
         "Site vitrine",
         "Site e-commerce",
         "Application web"
-      ],
-      "offers": [
-        {
-          "@type": "Offer",
-          "name": "Forfait Basique",
-          "price": "499",
-          "priceCurrency": "EUR",
-          "description": "Site vitrine one-page avec design responsive et SEO optimisé"
-        },
-        {
-          "@type": "Offer",
-          "name": "Forfait Populaire",
-          "price": "749",
-          "priceCurrency": "EUR",
-          "description": "Site multi-pages avec design sur mesure et animations"
-        },
-        {
-          "@type": "Offer",
-          "name": "Forfait Premium",
-          "price": "999",
-          "priceCurrency": "EUR",
-          "description": "Site complet avec e-commerce, animations 3D et CMS sur mesure"
-        }
       ],
       "sameAs": [
         "https://www.instagram.com/pixel.boost.web/",

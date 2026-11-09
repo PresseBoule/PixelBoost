@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router';
 import Layout from './components/Layout';
 import HomePage from './pages/HomePage';
 import AgentIAPage from './pages/AgentIAPage';
+import SitesWebPage from './pages/SitesWebPage';
 import FonctionnementPage from './pages/FonctionnementPage';
 import TarifsPage from './pages/TarifsPage';
 import CasClientPage from './pages/CasClientPage';
@@ -19,6 +20,7 @@ export const router = createBrowserRouter([
     children: [
       { index: true, Component: HomePage },
       { path: 'agent-ia', Component: AgentIAPage },
+      { path: 'creation-sites-web', Component: SitesWebPage },
       { path: 'fonctionnement', Component: FonctionnementPage },
       { path: 'tarifs', Component: TarifsPage },
       { path: 'cas-client', Component: CasClientPage },
