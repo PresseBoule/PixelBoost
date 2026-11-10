@@ -30,6 +30,8 @@ export default function ContactPage() {
     message: '',
   });
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     document.title = 'Contact | PixelBoost';
@@ -52,25 +54,35 @@ export default function ContactPage() {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const body = [
-      'Bonjour PixelBoost,',
-      '',
-      'Voici mon besoin :',
-      formData.message,
-      '',
-      `Nom : ${formData.name}`,
-      `Entreprise : ${formData.company}`,
-      `Email : ${formData.email}`,
-      `Téléphone : ${formData.phone || 'Non renseigné'}`,
-      `Possède déjà un site : ${formData.hasWebsite || 'Non renseigné'}`,
-      `URL du site : ${formData.website || 'Non renseignée'}`,
-      `Type de projet : ${formData.projectType}`,
-      `Budget indicatif : ${formData.budget || 'Non renseigné'}`,
-    ].join('\n');
-    window.location.href = `mailto:contact@pixelboost.fr?subject=${encodeURIComponent('Nouveau projet PixelBoost')}&body=${encodeURIComponent(body)}`;
-    setSubmitted(true);
+    if (sending) return;
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    if (!formData.name.trim() || !formData.company.trim() || !formData.email.trim() || !formData.message.trim()) {
+      setError('Veuillez remplir les champs obligatoires avec des informations valides.');
+      return;
+    }
+
+    setError('');
+    setSending(true);
+    try {
+      const body = new URLSearchParams();
+      for (const [key, value] of data.entries()) {
+        if (typeof value === 'string') body.append(key, value.trim());
+      }
+      const response = await fetch('/formulaire-devis.html', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: body.toString(),
+      });
+      if (!response.ok) throw new Error('Form submission failed');
+      setSubmitted(true);
+    } catch {
+      setError("Votre demande n'a pas pu être envoyée. Réessayez ou contactez-nous à contact@pixelboost.fr.");
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -116,15 +128,17 @@ export default function ContactPage() {
               transition={{ duration: 0.6, delay: 0.1 }}
             >
               {submitted ? (
-                <div className="py-20 text-center">
-                  <p className="font-['JetBrains_Mono',monospace] text-xs text-muted-foreground tracking-widest uppercase mb-4">Brouillon prêt</p>
-                  <h2 className="font-['Chakra_Petch',monospace] text-3xl text-foreground mb-4">Votre demande est prête à envoyer.</h2>
+                <div className="py-20 text-center" role="status" aria-live="polite">
+                  <p className="font-['JetBrains_Mono',monospace] text-xs text-muted-foreground tracking-widest uppercase mb-4">Demande envoyée</p>
+                  <h2 className="font-['Chakra_Petch',monospace] text-3xl text-foreground mb-4">Votre demande a bien été envoyée.</h2>
                   <p className="text-muted-foreground text-sm max-w-sm mx-auto">
-                    Votre application e-mail a ouvert un brouillon. Envoyez-le pour transmettre votre demande à PixelBoost.
+                    PixelBoost vous répondra dans les meilleurs délais.
                   </p>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form name="demande-devis" method="POST" onSubmit={handleSubmit} className="space-y-6">
+                  <input type="hidden" name="form-name" value="demande-devis" />
+                  <div hidden aria-hidden="true"><label htmlFor="bot-field">Ne pas remplir</label><input id="bot-field" name="bot-field" tabIndex={-1} autoComplete="off" /></div>
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <label htmlFor="name" className="block text-xs font-['JetBrains_Mono',monospace] text-muted-foreground tracking-wider uppercase mb-2">
@@ -246,11 +260,17 @@ export default function ContactPage() {
                     />
                   </div>
 
+                  <p className="text-xs text-muted-foreground leading-relaxed">
+                    Les informations saisies servent à répondre à votre demande et sont traitées par Netlify pour la transmission du formulaire. Consultez notre{' '}
+                    <a href="/politique-confidentialite" className="underline hover:text-foreground">politique de confidentialité</a>.
+                  </p>
+                  {error && <p role="alert" className="text-sm text-red-400">{error}</p>}
                   <button
                     type="submit"
-                    className="inline-flex items-center gap-2 font-['Chakra_Petch',monospace] text-sm tracking-wider text-background bg-foreground px-6 py-3.5 hover:bg-foreground/85 transition-colors"
+                    disabled={sending}
+                    className="inline-flex items-center gap-2 font-['Chakra_Petch',monospace] text-sm tracking-wider text-background bg-foreground px-6 py-3.5 hover:bg-foreground/85 disabled:opacity-60 transition-colors"
                   >
-                    Préparer mon email
+                    {sending ? 'Envoi en cours…' : 'Envoyer ma demande'}
                     <ArrowRight size={15} />
                   </button>
                 </form>

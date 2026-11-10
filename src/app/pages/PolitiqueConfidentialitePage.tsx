@@ -41,7 +41,7 @@ export default function PolitiqueConfidentialitePage() {
               <h2 className="font-['Chakra_Petch',monospace] text-base text-foreground mb-4">Données collectées</h2>
               <p>Nous collectons les données suivantes via le formulaire de contact :</p>
               <ul className="list-none space-y-2 mt-3">
-                {['Nom et prénom', "Nom de l'entreprise", 'Adresse email', 'Site web (optionnel)', 'Type de projet', 'Description du besoin'].map((item) => (
+                {['Nom et prénom', "Nom de l'entreprise", 'Adresse email', 'Téléphone (optionnel)', 'Site web existant et son adresse (optionnelle)', 'Type de projet', 'Budget indicatif (optionnel)', 'Description du besoin'].map((item) => (
                   <li key={item} className="flex items-center gap-2">
                     <span className="w-1 h-1 rounded-full bg-muted-foreground shrink-0" />
                     {item}
@@ -82,7 +82,7 @@ export default function PolitiqueConfidentialitePage() {
             <section>
               <h2 className="font-['Chakra_Petch',monospace] text-base text-foreground mb-4">Partage des données</h2>
               <p>
-                Vos données ne sont jamais vendues ni transmises à des tiers à des fins commerciales.
+                Les demandes de contact sont transmises et hébergées par Netlify pour le fonctionnement du formulaire et de ses notifications. Vos données ne sont jamais vendues ni transmises à des tiers à des fins commerciales.
                 Elles peuvent être partagées avec des prestataires techniques dans le cadre de la
                 réalisation de votre projet, sous contrat de confidentialité. Pour le fonctionnement de Nova, les messages sont traités par le prestataire de modèle de langage uniquement pour générer la réponse demandée.
               </p>
