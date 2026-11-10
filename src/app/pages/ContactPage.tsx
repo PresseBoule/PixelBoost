@@ -36,8 +36,14 @@ export default function ContactPage() {
   }, []);
 
   useEffect(() => {
-    const brief = new URLSearchParams(search).get('brief');
-    if (brief) setFormData((current) => ({ ...current, message: brief }));
+    const params = new URLSearchParams(search);
+    const brief = params.get('brief');
+    const prestation = params.get('prestation');
+    setFormData((current) => ({
+      ...current,
+      ...(brief ? { message: brief } : {}),
+      ...(prestation && projectTypes.includes(prestation) ? { projectType: prestation } : {}),
+    }));
   }, [search]);
 
   const handleChange = (

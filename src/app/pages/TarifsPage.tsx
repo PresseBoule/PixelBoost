@@ -12,49 +12,49 @@ const fadeUp = {
 
 const tiers = [
   {
-    name: 'Agent Essentiel',
-    tagline: "L'essentiel pour répondre à vos visiteurs.",
+    name: 'Assistant IA',
+    tagline: "Un assistant personnalisé pour votre site existant compatible.",
     price: 'Sur devis',
     priceSub: 'Installation + abonnement mensuel',
+    projectType: 'Assistant IA',
     features: [
       'Agent conversationnel personnalisé',
       'Réponses aux questions fréquentes',
-      'Formation sur vos informations spécifiques',
-      'Intégration directe sur votre site',
-      'Fallback vers vos coordonnées',
-      'Mises à jour incluses',
-      'Maintenance mensuelle',
+      'Configuration avec vos informations',
+      'Intégration sur un site compatible',
+      'Orientation vers un contact humain',
+      'Connexions possibles après étude',
     ],
   },
   {
-    name: 'Agent Connecté',
-    tagline: "Pour les entreprises souhaitant aller plus loin.",
+    name: 'Site web',
+    tagline: "Un site professionnel pour présenter votre activité et recevoir des demandes.",
     price: 'Sur devis',
-    priceSub: 'Installation + abonnement mensuel',
+    priceSub: 'Projet adapté à votre activité',
+    projectType: 'Site web',
+    features: [
+      'Site professionnel personnalisé',
+      'Affichage adapté aux mobiles',
+      'Présentation de vos services',
+      'Parcours de prise de contact',
+      'Optimisation SEO technique de base',
+      'Fonctionnalités supplémentaires après étude',
+    ],
+  },
+  {
+    name: 'Site web + assistant IA',
+    tagline: 'Un site professionnel et son assistant, conçus ensemble.',
+    price: 'Sur devis',
+    priceSub: "Création du site + installation de l'assistant",
+    projectType: 'Site web + Assistant IA',
     featured: true,
     features: [
-      'Tout ce qui est inclus dans Essentiel',
-      'Connexion aux calendriers',
-      'Connexion aux formulaires',
-      'Bases de données ou sources de données',
-      'Automatisations simples',
-      'Qualification des prospects',
-      "Rapport mensuel d'utilisation",
-    ],
-  },
-  {
-    name: 'Agent Sur mesure',
-    tagline: 'Pour les besoins complexes ou multi-canaux.',
-    price: 'Sur devis',
-    priceSub: 'Projet personnalisé',
-    features: [
-      'Tout ce qui est inclus dans Connecté',
-      'Workflows personnalisés avancés',
-      'Intégrations API sur mesure',
-      'Automatisations complexes',
-      'Email ou autres canaux (si compatible)',
-      'Architecture spécifique à votre métier',
-      'Accompagnement renforcé',
+      'Site professionnel adapté aux mobiles',
+      'Assistant IA personnalisé intégré au site',
+      'Réponses aux questions fréquentes',
+      'Orientation vers un contact humain',
+      'Parcours de contact cohérent',
+      'Intégrations possibles après étude',
     ],
   },
 ];
@@ -108,7 +108,7 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 
 export default function TarifsPage() {
   useEffect(() => {
-    document.title = 'Tarifs agents IA | PixelBoost';
+    document.title = 'Offres sites web et assistants IA | PixelBoost';
   }, []);
 
   return (
@@ -122,7 +122,7 @@ export default function TarifsPage() {
             transition={{ duration: 0.5 }}
             className="text-xs font-['JetBrains_Mono',monospace] text-muted-foreground tracking-[0.2em] uppercase mb-8"
           >
-            Tarifs
+            Offres
           </motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
@@ -138,7 +138,7 @@ export default function TarifsPage() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-muted-foreground text-lg leading-relaxed max-w-xl"
           >
-            Chaque entreprise n'a pas besoin du même niveau d'automatisation. Nous définissons ensemble ce qui est réellement adapté à votre situation.
+            Site web, assistant IA ou les deux : choisissez le point de départ adapté à votre projet. Chaque prestation est proposée sur devis.
           </motion.p>
         </div>
       </section>
@@ -158,7 +158,7 @@ export default function TarifsPage() {
               >
                 {tier.featured && (
                   <p className="font-['JetBrains_Mono',monospace] text-xs text-muted-foreground tracking-widest uppercase mb-6">
-                    Le plus demandé
+                    Solution combinée
                   </p>
                 )}
                 <h2 className="font-['Chakra_Petch',monospace] text-xl text-foreground mb-2">
@@ -181,14 +181,14 @@ export default function TarifsPage() {
                 </ul>
 
                 <Link
-                  to="/contact"
+                  to={`/contact?prestation=${encodeURIComponent(tier.projectType)}`}
                   className={`inline-flex items-center justify-center gap-2 text-sm py-3.5 px-5 transition-colors ${
                     tier.featured
                       ? 'font-["Chakra_Petch",monospace] tracking-wider text-background bg-foreground hover:bg-foreground/85'
                       : 'text-muted-foreground border border-border hover:text-foreground hover:border-foreground/30'
                   }`}
                 >
-                  Discuter de mon projet
+                  Demander un devis gratuit
                   <ArrowRight size={13} />
                 </Link>
               </motion.div>
@@ -197,8 +197,8 @@ export default function TarifsPage() {
 
           <motion.div {...fadeUp} transition={{ delay: 0.1 }} className="mt-8 p-6 bg-secondary border border-border">
             <p className="text-sm text-muted-foreground">
-              <span className="text-foreground">Besoin également d'un site ?</span>{' '}
-              PixelBoost peut concevoir ou moderniser votre site avant d'y intégrer votre agent. Mentionnez-le lors de votre prise de contact.
+              <span className="text-foreground">Un besoin particulier ?</span>{' '}
+              Les fonctionnalités et connexions sont définies selon votre activité et la compatibilité de vos outils.
             </p>
           </motion.div>
         </div>

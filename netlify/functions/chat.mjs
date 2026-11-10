@@ -9,9 +9,9 @@ PIXELBOOST — BASE DE CONNAISSANCES
 PixelBoost est une agence basée à Bordeaux, France, spécialisée dans les agents IA et les expériences web pour entreprises. Contact : pixelboost22@gmail.com, téléphone 07 85 75 90 40.
 
 Offres :
-- Agent Essentiel : agent conversationnel personnalisé, réponses aux questions fréquentes, formation sur les informations de l'entreprise, intégration au site, passage vers les coordonnées de l'entreprise, mises à jour et maintenance mensuelle.
-- Agent Connecté : tout l'Essentiel, plus connexions possibles à des calendriers, formulaires, bases de données ou sources de données, automatisations simples, qualification de prospects et rapport d'utilisation mensuel.
-- Agent Sur mesure : pour besoins complexes ou multicanaux, avec workflows et intégrations API sur mesure, automatisations complexes, email ou autres canaux lorsque compatibles, architecture métier et accompagnement renforcé.
+- Assistant IA : assistant personnalisé pour un site existant compatible, répondant aux questions fréquentes et orientant les demandes vers un contact humain ; connexions possibles après étude.
+- Site web : conception d'un site professionnel personnalisé et adapté aux mobiles, avec présentation des services, parcours de contact et optimisation SEO technique de base.
+- Site web + assistant IA : création d'un site professionnel avec assistant personnalisé intégré ; les connexions et fonctionnalités supplémentaires sont étudiées selon le projet.
 - Toutes les offres sont sur devis : ne jamais inventer de prix ni de durée ferme. L'installation est facturée une fois au démarrage. L'abonnement couvre la maintenance, les mises à jour, la surveillance et le support. Les coûts d'API sont facturés au coût réel et varient selon l'usage.
 
 Création de site : PixelBoost peut aussi concevoir ou moderniser un site avant l'installation d'un agent.
