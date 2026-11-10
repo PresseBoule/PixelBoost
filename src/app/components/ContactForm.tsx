@@ -43,7 +43,7 @@ Merci de répondre à cette demande.
     `.trim();
 
     // Ouvrir le client mail
-    window.location.href = `mailto:pixelboost22@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+    window.location.href = `mailto:contact@pixelboost.fr?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
     
     // Réinitialiser le formulaire après envoi
     setFormData({

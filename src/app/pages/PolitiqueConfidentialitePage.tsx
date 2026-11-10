@@ -33,7 +33,7 @@ export default function PolitiqueConfidentialitePage() {
               <h2 className="font-['Chakra_Petch',monospace] text-base text-foreground mb-4">Responsable du traitement</h2>
               <p>
                 PixelBoost, micro-entreprise basée à Bordeaux, France.<br />
-                Contact : pixelboost22@gmail.com
+                Contact : contact@pixelboost.fr
               </p>
             </section>
 
@@ -101,8 +101,8 @@ export default function PolitiqueConfidentialitePage() {
               </ul>
               <p className="mt-4">
                 Pour exercer ces droits, contactez-nous à{' '}
-                <a href="mailto:pixelboost22@gmail.com" className="text-foreground hover:text-foreground/70 transition-colors">
-                  pixelboost22@gmail.com
+                <a href="mailto:contact@pixelboost.fr" className="text-foreground hover:text-foreground/70 transition-colors">
+                  contact@pixelboost.fr
                 </a>.
               </p>
             </section>

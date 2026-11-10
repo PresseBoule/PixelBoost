@@ -69,7 +69,7 @@ export default function ContactPage() {
       `Type de projet : ${formData.projectType}`,
       `Budget indicatif : ${formData.budget || 'Non renseigné'}`,
     ].join('\n');
-    window.location.href = `mailto:pixelboost22@gmail.com?subject=${encodeURIComponent('Nouveau projet PixelBoost')}&body=${encodeURIComponent(body)}`;
+    window.location.href = `mailto:contact@pixelboost.fr?subject=${encodeURIComponent('Nouveau projet PixelBoost')}&body=${encodeURIComponent(body)}`;
     setSubmitted(true);
   };
 
@@ -270,11 +270,11 @@ export default function ContactPage() {
                 </p>
                 <div className="space-y-4">
                   <a
-                    href="mailto:pixelboost22@gmail.com"
+                    href="mailto:contact@pixelboost.fr"
                     className="flex items-center gap-3 text-sm text-muted-foreground hover:text-foreground transition-colors"
                   >
                     <Mail size={14} className="shrink-0" />
-                    pixelboost22@gmail.com
+                    contact@pixelboost.fr
                   </a>
                   <a
                     href="tel:+33785759040"

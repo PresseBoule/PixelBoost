@@ -794,7 +794,7 @@ export function PixelBoostSite() {
                     {/* Coordonnées avec apparition en cascade */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 max-w-6xl mx-auto pb-8">
                       <motion.a
-                        href="mailto:pixelboost22@gmail.com"
+                        href="mailto:contact@pixelboost.fr"
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.6, duration: 0.6 }}
@@ -810,7 +810,7 @@ export function PixelBoostSite() {
                           transition={{ duration: 0.8 }}
                         />
                         <Mail className="w-5 h-5 relative z-10" />
-                        <span className="text-sm text-white/70 relative z-10">pixelboost22@gmail.com</span>
+                        <span className="text-sm text-white/70 relative z-10">contact@pixelboost.fr</span>
                       </motion.a>
 
                       <motion.a

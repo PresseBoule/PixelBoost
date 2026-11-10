@@ -145,7 +145,7 @@ export default function Layout() {
               </motion.div>
             </div>
             <div className="px-6 pb-8 flex items-center gap-6">
-              <a href="mailto:pixelboost22@gmail.com" className="text-xs text-muted-foreground hover:text-foreground transition-colors">pixelboost22@gmail.com</a>
+              <a href="mailto:contact@pixelboost.fr" className="text-xs text-muted-foreground hover:text-foreground transition-colors">contact@pixelboost.fr</a>
               <a href="tel:+33785759040" className="text-xs text-muted-foreground hover:text-foreground transition-colors">07 85 75 90 40</a>
             </div>
           </motion.div>
@@ -228,11 +228,11 @@ export default function Layout() {
               <ul className="space-y-3">
                 <li>
                   <a
-                    href="mailto:pixelboost22@gmail.com"
+                    href="mailto:contact@pixelboost.fr"
                     className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center gap-2"
                   >
                     <Mail size={13} />
-                    pixelboost22@gmail.com
+                    contact@pixelboost.fr
                   </a>
                 </li>
                 <li>

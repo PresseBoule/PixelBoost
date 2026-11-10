@@ -88,7 +88,7 @@ export default function PolitiqueConfidentialite({ onClose }: PolitiqueConfident
             <p className="leading-relaxed mt-4">
               Ces données ne sont utilisées que pour répondre aux demandes des utilisateurs et ne sont jamais cédées à des tiers. 
               Conformément au RGPD, vous pouvez demander la suppression ou la modification de vos données à l'adresse suivante : 
-              <a href="mailto:pixelboost22@gmail.com" className="text-white hover:underline ml-1">pixelboost22@gmail.com</a>
+              <a href="mailto:contact@pixelboost.fr" className="text-white hover:underline ml-1">contact@pixelboost.fr</a>
             </p>
           </section>
 
@@ -119,7 +119,7 @@ export default function PolitiqueConfidentialite({ onClose }: PolitiqueConfident
             </ul>
             <p className="leading-relaxed mt-4">
               Pour exercer ces droits, contactez-nous à : 
-              <a href="mailto:pixelboost22@gmail.com" className="text-white hover:underline ml-1">pixelboost22@gmail.com</a>
+              <a href="mailto:contact@pixelboost.fr" className="text-white hover:underline ml-1">contact@pixelboost.fr</a>
             </p>
           </section>
 
@@ -168,7 +168,7 @@ export default function PolitiqueConfidentialite({ onClose }: PolitiqueConfident
               Pour toute question concernant cette politique de confidentialité ou vos données personnelles, vous pouvez nous contacter :
             </p>
             <div className="mt-4 space-y-2">
-              <p><strong className="text-white/90">Email :</strong> pixelboost22@gmail.com</p>
+              <p><strong className="text-white/90">Email :</strong> contact@pixelboost.fr</p>
               <p><strong className="text-white/90">Téléphone :</strong> 07 85 75 90 40</p>
               <p><strong className="text-white/90">Adresse :</strong> 71 cours Gambetta, 33400 Talence, France</p>
             </div>

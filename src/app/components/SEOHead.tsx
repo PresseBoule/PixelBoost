@@ -176,7 +176,7 @@ export function SEOHead({
       "description": description,
       "url": url,
       "telephone": "+33785759040",
-      "email": "pixelboost22@gmail.com",
+      "email": "contact@pixelboost.fr",
       "address": {
         "@type": "PostalAddress",
         "addressCountry": "FR",

@@ -50,7 +50,7 @@ export default function MentionsLegales({ onClose }: MentionsLegalesProps) {
               <p><strong className="text-white/90">Adresse du siège social :</strong><br />
               71 cours Gambetta<br />
               33400 Talence, France</p>
-              <p><strong className="text-white/90">Email :</strong> pixelboost22@gmail.com</p>
+              <p><strong className="text-white/90">Email :</strong> contact@pixelboost.fr</p>
               <p><strong className="text-white/90">Téléphone :</strong> 07 85 75 90 40</p>
             </div>
           </section>
@@ -89,7 +89,7 @@ export default function MentionsLegales({ onClose }: MentionsLegalesProps) {
               vous disposez d'un droit d'accès, de rectification, de suppression et d'opposition aux données personnelles vous concernant.
             </p>
             <p className="leading-relaxed mt-4">
-              Pour exercer ces droits, vous pouvez nous contacter à l'adresse : pixelboost22@gmail.com
+              Pour exercer ces droits, vous pouvez nous contacter à l'adresse : contact@pixelboost.fr
             </p>
           </section>
 

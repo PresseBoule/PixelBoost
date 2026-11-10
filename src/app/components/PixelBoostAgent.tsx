@@ -61,7 +61,7 @@ export default function PixelBoostAgent() {
     } catch {
       setMessages((current) => [
         ...current,
-        { role: 'assistant', content: "Je n'arrive pas à joindre le service pour l'instant. Vous pouvez écrire à pixelboost22@gmail.com." },
+        { role: 'assistant', content: "Je n'arrive pas à joindre le service pour l'instant. Vous pouvez écrire à contact@pixelboost.fr." },
       ]);
     } finally {
       setLoading(false);

@@ -300,7 +300,7 @@ export default function CGV({ onClose }: CGVProps) {
             <div className="space-y-2">
               <p><strong className="text-white/90">PixelBoost</strong></p>
               <p>71 cours Gambetta, 33400 Talence, France</p>
-              <p>Email : pixelboost22@gmail.com</p>
+              <p>Email : contact@pixelboost.fr</p>
               <p>Téléphone : 07 85 75 90 40</p>
               <p>SIRET : 990 252 132 00016</p>
             </div>

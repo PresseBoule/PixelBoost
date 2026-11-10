@@ -16,7 +16,7 @@
 ### 2. Informations intégrées
 - Nom de l'entreprise : PixelBoost
 - Téléphone : 07 85 75 90 40
-- Email : pixelboost22@gmail.com
+- Email : contact@pixelboost.fr
 - Services : Création site web, e-commerce, applications
 - Tarifs : 499€ - 999€
 - Réseaux sociaux : Instagram, Facebook

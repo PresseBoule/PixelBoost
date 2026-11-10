@@ -35,7 +35,7 @@ export default function MentionsLegalesPage() {
                 PixelBoost<br />
                 Micro-entreprise<br />
                 Bordeaux, France<br />
-                Email : pixelboost22@gmail.com<br />
+                Email : contact@pixelboost.fr<br />
                 Téléphone : 07 85 75 90 40
               </p>
             </section>
@@ -68,7 +68,7 @@ export default function MentionsLegalesPage() {
                 Les données collectées via le formulaire de contact sont utilisées uniquement pour répondre
                 à vos demandes. Elles ne sont pas transmises à des tiers. Conformément au RGPD, vous
                 disposez d'un droit d'accès, de rectification et de suppression de vos données.
-                Contactez-nous à pixelboost22@gmail.com pour exercer ces droits.
+                Contactez-nous à contact@pixelboost.fr pour exercer ces droits.
               </p>
             </section>
 
