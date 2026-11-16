@@ -32,10 +32,10 @@ export default function MentionsLegalesPage() {
             <section>
               <h2 className="font-['Chakra_Petch',monospace] text-base text-foreground mb-4">Éditeur du site</h2>
               <p>
-                PixelBoost<br />
-                Micro-entreprise<br />
+                Camille Panazol, entrepreneur individuel (EI)<br />
+                Nom commercial : PixelBoost<br />
                 SIRET : 990 252 132 00016<br />
-                Bordeaux, France<br />
+                20 rue Louis Denis Mallet, 33130 Bègles, France<br />
                 Email : contact@pixelboost.fr<br />
                 Téléphone : 07 85 75 90 40
               </p>
@@ -43,14 +43,17 @@ export default function MentionsLegalesPage() {
 
             <section>
               <h2 className="font-['Chakra_Petch',monospace] text-base text-foreground mb-4">Directeur de la publication</h2>
-              <p>Le responsable de la publication est le gérant de la micro-entreprise PixelBoost.</p>
+              <p>Camille Panazol</p>
             </section>
 
             <section>
               <h2 className="font-['Chakra_Petch',monospace] text-base text-foreground mb-4">Hébergement</h2>
               <p>
-                Ce site est hébergé par un prestataire tiers. Pour toute question relative à l'hébergement,
-                veuillez nous contacter directement.
+                Netlify, Inc.<br />
+                101 2nd Street, San Francisco, CA 94105, États-Unis<br />
+                Téléphone : +1 415 323 3482<br />
+                Email : support@netlify.com<br />
+                Site : <a href="https://www.netlify.com" className="text-foreground underline">www.netlify.com</a>
               </p>
             </section>
 
@@ -66,10 +69,10 @@ export default function MentionsLegalesPage() {
             <section>
               <h2 className="font-['Chakra_Petch',monospace] text-base text-foreground mb-4">Données personnelles</h2>
               <p>
-                Les données collectées via le formulaire de contact sont utilisées uniquement pour répondre
-                à vos demandes. Elles ne sont pas transmises à des tiers. Conformément au RGPD, vous
-                disposez d'un droit d'accès, de rectification et de suppression de vos données.
-                Contactez-nous à contact@pixelboost.fr pour exercer ces droits.
+                Les données du formulaire servent à répondre à vos demandes et sont traitées par Netlify
+                pour leur transmission. Pour connaître les destinataires, la durée de conservation et vos droits,
+                consultez notre <Link to="/politique-confidentialite" className="text-foreground underline">politique de confidentialité</Link>.
+                Contact : contact@pixelboost.fr.
               </p>
             </section>
 

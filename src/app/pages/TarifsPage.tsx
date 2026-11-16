@@ -66,7 +66,7 @@ const faqItems = [
   },
   {
     q: "L'abonnement mensuel est-il obligatoire ?",
-    a: "Oui. L'abonnement couvre la maintenance technique de l'agent, les mises à jour de ses informations et le suivi de son bon fonctionnement. Il garantit que l'agent reste opérationnel et à jour.",
+    a: "Oui. L'abonnement couvre la maintenance technique de l'agent, les mises à jour de ses informations et le suivi de son fonctionnement. Ces mesures permettent de détecter et corriger les problèmes, sans garantir une disponibilité permanente.",
   },
   {
     q: "Peut-on modifier l'agent après l'installation ?",

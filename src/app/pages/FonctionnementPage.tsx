@@ -72,7 +72,7 @@ const faq = [
   },
   {
     q: "Que se passe-t-il quand il ne connaît pas la réponse ?",
-    a: "L'agent indique clairement qu'il ne peut pas répondre à cette question et oriente la personne vers vous. Il ne fabrique pas de réponses.",
+    a: "L'agent est configuré pour indiquer ses limites et orienter le visiteur vers un contact humain lorsqu'il ne dispose pas d'une réponse fiable. Comme toute IA, il peut toutefois se tromper : ses réponses doivent être testées et suivies dans le temps.",
   },
   {
     q: "Comment fonctionne la maintenance ?",

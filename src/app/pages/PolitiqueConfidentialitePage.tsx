@@ -32,7 +32,8 @@ export default function PolitiqueConfidentialitePage() {
             <section>
               <h2 className="font-['Chakra_Petch',monospace] text-base text-foreground mb-4">Responsable du traitement</h2>
               <p>
-                PixelBoost, micro-entreprise basée à Bordeaux, France.<br />
+                Camille Panazol, entrepreneur individuel (EI), exerçant sous le nom PixelBoost.<br />
+                20 rue Louis Denis Mallet, 33130 Bègles, France.<br />
                 Contact : contact@pixelboost.fr
               </p>
             </section>

@@ -81,7 +81,7 @@ const capabilities = [
   { title: "Il sait ce que vous lui apprenez", text: "L'agent connaît vos services, tarifs, règles, horaires et toutes les informations que vous lui transmettez lors de la configuration." },
   { title: "Il consulte certaines données", text: "Selon votre projet, il peut être connecté à des calendriers, bases de données ou formulaires compatibles pour répondre avec des données en temps réel." },
   { title: "Il qualifie vos visiteurs", text: "Avant de transmettre une demande, il peut poser les bonnes questions pour vous faire gagner du temps." },
-  { title: "Il sait quand passer la main", text: "Lorsqu'une situation dépasse ses capacités, l'agent l'indique clairement et oriente la personne vers vous ou votre équipe." },
+  { title: "Il peut orienter vers un humain", text: "L'agent est configuré pour signaler ses limites et orienter les demandes complexes vers un contact humain. Ses réponses peuvent néanmoins comporter des erreurs." },
   { title: "Il évolue avec vous", text: "Les informations peuvent être mises à jour à tout moment. L'agent suit l'évolution de votre activité." },
   { title: "Il ne prétend pas être humain", text: "L'agent se présente comme un assistant automatisé. La transparence est une valeur que nous intégrons dès la configuration." },
 ];
@@ -177,7 +177,7 @@ export default function AgentIAPage() {
           <motion.div {...fadeUp} transition={{ delay: 0.1 }} className="mt-8 p-6 bg-secondary border border-border">
             <p className="text-sm text-muted-foreground leading-relaxed">
               <span className="text-foreground font-medium">Important : </span>
-              les capacités de l'agent dépendent directement des informations qui lui sont transmises et des intégrations mises en place. Nous ne promettons que ce qui est techniquement réalisable dans votre contexte.
+              les capacités de l'agent dépendent des informations transmises et des intégrations mises en place. Une IA peut produire des réponses inexactes : ses résultats doivent être testés et suivis.
             </p>
           </motion.div>
         </div>
@@ -194,8 +194,10 @@ export default function AgentIAPage() {
             transition={{ delay: 0.05 }}
             className="font-['Chakra_Petch',monospace] text-[clamp(1.6rem,3.5vw,2.8rem)] leading-tight text-foreground mb-12"
           >
-            Des exemples concrets.
+            Des exemples illustratifs.
           </motion.h2>
+
+          <p className="text-sm text-muted-foreground mb-6">Ces conversations sont fictives et illustrent des possibilités qui dépendent des informations et des connexions configurées.</p>
 
           <div className="border border-border bg-background">
             {conversations.map((conv, i) => (
