@@ -24,6 +24,7 @@ export default function Layout() {
     '/creation-sites-web': { title: 'Création de sites web professionnels | PixelBoost', description: 'Sites vitrines modernes, responsive et pensés pour faciliter la prise de contact.' },
     '/agent-ia': { title: 'Assistant IA pour site web | PixelBoost', description: 'Des assistants IA personnalisés pour répondre aux visiteurs et qualifier les demandes.' },
     '/tarifs': { title: 'Offres sur devis | PixelBoost', description: 'Site web, assistant IA ou solution combinée : chaque projet PixelBoost est étudié sur devis.' },
+    '/cas-client': { title: 'Site web et assistant IA — Les Gîtes du Soulor | PixelBoost', description: 'Découvrez le site web et l’assistant IA créés par PixelBoost pour Les Gîtes du Soulor.' },
     '/realisations': { title: 'Réalisations web et IA | PixelBoost', description: 'Découvrez les réalisations PixelBoost, dont le projet Les Gîtes du Soulor.' },
     '/contact': { title: 'Demander un devis | PixelBoost', description: 'Parlez-nous de votre projet de site web ou d’assistant IA.' },
   };

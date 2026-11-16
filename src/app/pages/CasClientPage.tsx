@@ -75,7 +75,7 @@ const agentInfo = [
 
 export default function CasClientPage() {
   useEffect(() => {
-    document.title = "Agent IA pour hébergement touristique — Les Gîtes du Soulor | PixelBoost";
+    document.title = "Site web et assistant IA — Les Gîtes du Soulor | PixelBoost";
   }, []);
 
   return (
@@ -89,7 +89,7 @@ export default function CasClientPage() {
             transition={{ duration: 0.5 }}
             className="text-xs font-['JetBrains_Mono',monospace] text-muted-foreground tracking-[0.2em] uppercase mb-8"
           >
-            Cas client
+            Cas client · Site web + assistant IA
           </motion.p>
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
@@ -97,7 +97,7 @@ export default function CasClientPage() {
             transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="font-['Chakra_Petch',monospace] text-[clamp(2rem,5vw,4.5rem)] leading-[1.05] tracking-tight text-foreground mb-6 max-w-3xl"
           >
-            Les Gîtes du Soulor — un agent en production.
+            Les Gîtes du Soulor — un site web avec son assistant IA.
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 16 }}
@@ -105,7 +105,7 @@ export default function CasClientPage() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-muted-foreground text-lg leading-relaxed max-w-xl mb-10"
           >
-            Hébergements touristiques situés dans le Val d'Azun, Pyrénées. Un cas réel qui montre concrètement ce qu'un agent PixelBoost peut faire pour une activité d'accueil.
+            Pour ces hébergements touristiques du Val d'Azun, PixelBoost a créé le site web et intégré un assistant IA : une solution complète pour présenter les gîtes, accompagner les visiteurs et faciliter leurs demandes de réservation.
           </motion.p>
           <motion.div
             initial={{ opacity: 0 }}
@@ -156,9 +156,9 @@ export default function CasClientPage() {
               className="bg-background p-8"
             >
               <p className="font-['JetBrains_Mono',monospace] text-xs text-muted-foreground uppercase tracking-widest mb-4">Le besoin</p>
-              <h3 className="font-['Chakra_Petch',monospace] text-lg text-foreground mb-3">Moins de sollicitations directes</h3>
+              <h3 className="font-['Chakra_Petch',monospace] text-lg text-foreground mb-3">Présenter les gîtes et faciliter les échanges</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                Les visiteurs posaient souvent les mêmes questions sur les disponibilités, les tarifs et les règles — des questions auxquelles le propriétaire devait répondre manuellement, même en dehors des heures d'ouverture.
+                Permettre aux visiteurs de découvrir les hébergements et les prestations, de trouver les informations utiles et d'obtenir des réponses à leurs questions avant de réserver.
               </p>
             </motion.div>
             <motion.div
@@ -169,11 +169,27 @@ export default function CasClientPage() {
               className="bg-background p-8"
             >
               <p className="font-['JetBrains_Mono',monospace] text-xs text-muted-foreground uppercase tracking-widest mb-4">La solution</p>
-              <h3 className="font-['Chakra_Petch',monospace] text-lg text-foreground mb-3">Un agent conversationnel dédié</h3>
+              <h3 className="font-['Chakra_Petch',monospace] text-lg text-foreground mb-3">Un site web et un assistant IA</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                Un agent formé sur toutes les informations spécifiques des gîtes, capable de répondre aux questions fréquentes et d'orienter les visiteurs vers la réservation.
+                Création du site et intégration d'un assistant configuré avec les informations des gîtes, pour répondre aux questions fréquentes et orienter les visiteurs vers la réservation ou le propriétaire.
               </p>
             </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Le site web */}
+      <section className="py-28 px-6 md:px-10 border-t border-border">
+        <div className="max-w-7xl mx-auto">
+          <motion.p {...fadeUp} className="text-xs font-['JetBrains_Mono',monospace] text-muted-foreground tracking-[0.2em] uppercase mb-4">Création du site web</motion.p>
+          <motion.h2 {...fadeUp} className="font-['Chakra_Petch',monospace] text-[clamp(1.6rem,3.5vw,2.8rem)] leading-tight text-foreground mb-6">Une vitrine pour découvrir et préparer son séjour.</motion.h2>
+          <motion.p {...fadeUp} className="text-muted-foreground leading-relaxed max-w-2xl mb-12">PixelBoost a conçu le site des Gîtes du Soulor pour présenter l'établissement, ses hébergements et son espace bien-être, tout en guidant les visiteurs vers les informations pratiques et les demandes de réservation.</motion.p>
+          <div className="grid md:grid-cols-3 gap-px bg-border">
+            {[
+              { title: 'Découvrir les gîtes', text: 'Présentation des hébergements, de leurs équipements et du cadre du Val d’Azun.' },
+              { title: 'Préparer son séjour', text: 'Informations pratiques, tarifs, activités et présentation du bain nordique et du sauna.' },
+              { title: 'Passer à la réservation', text: 'Accès aux calendriers et aux formulaires de réservation du site.' },
+            ].map((item) => <div key={item.title} className="bg-background p-8"><h3 className="font-['Chakra_Petch',monospace] text-base text-foreground mb-3">{item.title}</h3><p className="text-sm text-muted-foreground leading-relaxed">{item.text}</p></div>)}
           </div>
         </div>
       </section>
@@ -182,14 +198,14 @@ export default function CasClientPage() {
       <section className="py-28 px-6 md:px-10 bg-secondary border-t border-border">
         <div className="max-w-7xl mx-auto">
           <motion.p {...fadeUp} className="text-xs font-['JetBrains_Mono',monospace] text-muted-foreground tracking-[0.2em] uppercase mb-4">
-            Connaissance de l'agent
+            Assistant IA intégré
           </motion.p>
           <motion.h2
             {...fadeUp}
             transition={{ delay: 0.05 }}
             className="font-['Chakra_Petch',monospace] text-[clamp(1.6rem,3.5vw,2.8rem)] leading-tight text-foreground mb-16"
           >
-            Ce qu'il sait.
+            Un assistant pour accompagner les visiteurs.
           </motion.h2>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-border">
@@ -258,7 +274,7 @@ export default function CasClientPage() {
             transition={{ delay: 0.1 }}
             className="text-muted-foreground text-base mb-10 max-w-lg"
           >
-            Décrivez votre activité. Nous analysons ensemble ce qu'un agent peut faire pour vous, sans engagement.
+            Décrivez votre activité. Nous étudions ensemble votre besoin de site web, d'assistant IA ou d'une solution combinée, sans engagement.
           </motion.p>
           <motion.div
             initial={{ opacity: 0 }}
@@ -271,7 +287,7 @@ export default function CasClientPage() {
               to="/contact"
               className="inline-flex items-center gap-2 font-['Chakra_Petch',monospace] text-sm tracking-wider text-background bg-foreground px-6 py-3.5 hover:bg-foreground/85 transition-colors"
             >
-              Je veux la même chose pour mon entreprise
+              Demander un devis gratuit
               <ArrowRight size={15} />
             </Link>
             <a

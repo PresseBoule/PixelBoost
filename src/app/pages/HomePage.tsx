@@ -434,10 +434,10 @@ export default function HomePage() {
                 transition={{ duration: 0.6, delay: 0.05 }}
                 className="font-['Chakra_Petch',monospace] text-[clamp(1.8rem,4vw,3rem)] leading-tight text-foreground mb-6"
               >
-                Les Gîtes du Soulor — un agent en production.
+                Les Gîtes du Soulor — un site web et son assistant IA.
               </motion.h2>
               <motion.p {...fadeUp} transition={{ delay: 0.1 }} className="text-muted-foreground leading-relaxed mb-8">
-                Hébergements touristiques dans le Val d'Azun. L'agent répond aux questions des visiteurs sur les disponibilités, les tarifs et les règles de l'établissement — directement sur le site, à toute heure.
+                PixelBoost a créé le site de ces hébergements touristiques du Val d'Azun et y a intégré un assistant IA pour guider les visiteurs, répondre à leurs questions et les orienter vers la réservation.
               </motion.p>
               <motion.div {...fadeUp} transition={{ delay: 0.15 }} className="flex flex-wrap gap-4">
                 <Link
