@@ -34,6 +34,7 @@ export default function MentionsLegalesPage() {
               <p>
                 PixelBoost<br />
                 Micro-entreprise<br />
+                SIRET : 990 252 132 00016<br />
                 Bordeaux, France<br />
                 Email : contact@pixelboost.fr<br />
                 Téléphone : 07 85 75 90 40
