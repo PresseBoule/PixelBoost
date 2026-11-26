@@ -9,6 +9,8 @@ import CasClientPage from './pages/CasClientPage';
 import RealisationsPage from './pages/RealisationsPage';
 import ProjetPage from './pages/ProjetPage';
 import ContactPage from './pages/ContactPage';
+import DemonstrationsPage from './pages/DemonstrationsPage';
+import DemoSitePage from './pages/DemoSitePage';
 import NotFoundPage from './pages/NotFoundPage';
 import MentionsLegalesPage from './pages/MentionsLegalesPage';
 import PolitiqueConfidentialitePage from './pages/PolitiqueConfidentialitePage';
@@ -27,6 +29,8 @@ export const router = createBrowserRouter([
       { path: 'realisations', Component: RealisationsPage },
       { path: 'realisations/:slug', Component: ProjetPage },
       { path: 'contact', Component: ContactPage },
+      { path: 'demonstrations', Component: DemonstrationsPage },
+      { path: 'demonstrations/:slug', Component: DemoSitePage },
       { path: 'mentions-legales', Component: MentionsLegalesPage },
       { path: 'politique-confidentialite', Component: PolitiqueConfidentialitePage },
       { path: '*', Component: NotFoundPage },

@@ -12,6 +12,7 @@ const navLinks = [
   { to: '/tarifs', label: 'Offres' },
   { to: '/cas-client', label: 'Cas client' },
   { to: '/realisations', label: 'Réalisations' },
+  { to: '/demonstrations', label: 'Démonstrations' },
   { to: '/contact', label: 'Contact' },
 ];
 
@@ -26,6 +27,7 @@ export default function Layout() {
     '/tarifs': { title: 'Offres sur devis | PixelBoost', description: 'Site web, assistant IA ou solution combinée : chaque projet PixelBoost est étudié sur devis.' },
     '/cas-client': { title: 'Site web et assistant IA — Les Gîtes du Soulor | PixelBoost', description: 'Découvrez le site web et l’assistant IA créés par PixelBoost pour Les Gîtes du Soulor.' },
     '/realisations': { title: 'Réalisations web et IA | PixelBoost', description: 'Découvrez les réalisations PixelBoost, dont le projet Les Gîtes du Soulor.' },
+    '/demonstrations': { title: 'Démonstrations d’assistants IA | PixelBoost', description: 'Explorez un projet réel et cinq mini-sites fictifs créés pour illustrer les futurs assistants IA PixelBoost.' },
     '/contact': { title: 'Demander un devis | PixelBoost', description: 'Parlez-nous de votre projet de site web ou d’assistant IA.' },
   };
   const seo = pageSeo[pathname] ?? { title: 'PixelBoost | Sites web et assistants IA', description: 'Sites web professionnels et assistants IA sur mesure pour les entreprises.' };
@@ -45,6 +47,10 @@ export default function Layout() {
     document.body.style.overflow = menuOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [menuOpen]);
+
+  if (pathname.startsWith('/demonstrations/')) {
+    return <><SEOHead title="Démonstration fictive | PixelBoost" description="Découvrez un concept de site professionnel créé par PixelBoost à des fins de démonstration." /><Outlet /></>;
+  }
 
   return (
     <div className="min-h-screen bg-background text-foreground font-['DM_Sans',sans-serif]">
@@ -66,7 +72,7 @@ export default function Layout() {
           </Link>
 
           {/* Desktop links */}
-          <div className="hidden lg:flex items-center gap-7">
+          <div className="hidden lg:flex items-center gap-5">
             {navLinks.map((link) => (
               <NavLink
                 key={link.to}
