@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from 'motion/react';
 import { Menu, X, Mail, Phone, Instagram, Facebook, ArrowUpRight } from 'lucide-react';
 import TikTokIcon from './TikTokIcon';
 import { SEOHead } from './SEOHead';
+import PixelBoostAgent from './PixelBoostAgent';
 
 const navLinks = [
   { to: '/creation-sites-web', label: 'Sites web' },
@@ -289,6 +290,7 @@ export default function Layout() {
           </div>
         </div>
       </footer>
+      <PixelBoostAgent />
     </div>
   );
 }
