@@ -53,7 +53,22 @@ export default async (request) => {
       const confirmed = /\b(confirme|confirmation|oui,? je confirme)\b/i.test(body.messages.at(-1).content);
       const outcome = call.name === 'simulate_booking' && !confirmed ? { confirmed: false, reason: 'Confirmation explicite requise avant la simulation.' } : executeTool(call.name, args);
       actions.push({ name: call.name, result: outcome });
-      result = await ask([...input, ...result.output, { type: 'function_call_output', call_id: call.call_id, output: JSON.stringify(outcome) }]);
+      // Tool results are presented deterministically: the model cannot claim a
+      // booking succeeded when validation rejected it, and no second API call is needed.
+      let reply;
+      if (call.name === 'simulate_booking') {
+        reply = outcome.confirmed
+          ? `CONFIRMATION FICTIVE — ${outcome.name}, table pour ${outcome.guests} personne(s) le ${outcome.date} à ${outcome.time}. Aucune réservation réelle n'a été effectuée.`
+          : `La réservation fictive n'a pas été confirmée : ${outcome.reason}`;
+      } else if (call.name === 'check_tables') {
+        reply = outcome.available
+          ? `Ce créneau est disponible uniquement dans la simulation : ${outcome.date} à ${outcome.time} pour ${outcome.guests} personne(s). Pour confirmer la réservation fictive, répondez « Je confirme au nom de Alex Démo ». Aucune table réelle ne sera réservée.`
+          : `Ce créneau fictif n'est pas disponible : ${outcome.reason}`;
+      } else {
+        reply = 'Action indisponible dans cette démonstration.';
+      }
+      console.info('demo_usage', JSON.stringify({ assistant: 'restaurant', input: result.usage?.input_tokens || 0, output: result.usage?.output_tokens || 0, actions: 1 }));
+      return json(200, { reply, actions });
     }
     const reply = getText(result).trim();
     if (!reply) throw new Error('Empty model output');
