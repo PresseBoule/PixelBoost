@@ -5,7 +5,7 @@ import { restaurant } from './restaurant.mjs';
 
 type Message = { role: 'assistant' | 'user'; content: string };
 const greeting: Message = { role: 'assistant', content: 'Bienvenue chez Maison Sève, une démonstration fictive. Je peux vous présenter la carte, conseiller un plat ou simuler une réservation. Aucune table réelle ne sera réservée.' };
-const suggestions = ['Montre-moi la carte', 'Quels plats déclarent des arachides ?', 'Je voudrais simuler une réservation'];
+const suggestions = ['Montre-moi la carte', 'Quels plats contiennent des fraises ?', 'Je voudrais simuler une réservation'];
 export default function RestaurantAgent() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([greeting]);
