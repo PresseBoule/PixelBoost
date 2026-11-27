@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import { MessageCircle, X, Send, RotateCcw } from 'lucide-react';
 
 type Message = { role: 'assistant' | 'user'; content: string };
-const greeting: Message = { role: 'assistant', content: 'Bienvenue chez Atelier Volt, entreprise fictive. Je peux présenter les prestations, vérifier la zone d’intervention fictive et préparer une demande de devis simulée. Aucune intervention réelle ne sera organisée.' };
+const greeting: Message = { role: 'assistant', content: 'Bienvenue chez Atelier Volt. Je peux vous renseigner sur nos prestations, notre zone d’intervention et préparer votre projet. Que souhaitez-vous savoir ?' };
 const suggestions = ['Quelles prestations proposez-vous ?', 'Intervenez-vous à Talence ?', 'Je veux préparer un devis fictif'];
 export default function ArtisanAgent() {
   const [open, setOpen] = useState(false);
