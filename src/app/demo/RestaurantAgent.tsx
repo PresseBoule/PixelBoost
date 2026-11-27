@@ -4,7 +4,7 @@ import { MessageCircle, X, Send, RotateCcw } from 'lucide-react';
 import { restaurant } from './restaurant.mjs';
 
 type Message = { role: 'assistant' | 'user'; content: string };
-const greeting: Message = { role: 'assistant', content: 'Bienvenue chez Maison Sève, une démonstration fictive. Je peux vous présenter la carte, conseiller un plat ou simuler une réservation. Aucune table réelle ne sera réservée.' };
+const greeting: Message = { role: 'assistant', content: 'Bienvenue chez Maison Sève. Je peux vous présenter la carte, vous conseiller un plat ou vous aider à choisir un créneau. Que souhaitez-vous savoir ?' };
 const suggestions = ['Montre-moi la carte', 'Quels plats contiennent des fraises ?', 'Je voudrais simuler une réservation'];
 export default function RestaurantAgent() {
   const [open, setOpen] = useState(false);
