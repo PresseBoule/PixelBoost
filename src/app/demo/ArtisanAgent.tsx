@@ -4,7 +4,7 @@ import { MessageCircle, X, Send, RotateCcw } from 'lucide-react';
 
 type Message = { role: 'assistant' | 'user'; content: string };
 const greeting: Message = { role: 'assistant', content: 'Bienvenue chez Atelier Volt. Je peux vous renseigner sur nos prestations, notre zone d’intervention et préparer votre projet. Que souhaitez-vous savoir ?' };
-const suggestions = ['Quelles prestations proposez-vous ?', 'Intervenez-vous à Talence ?', 'Je veux préparer un devis fictif'];
+const suggestions = ['Quelles prestations proposez-vous ?', 'Quel est le premier créneau disponible ?', 'Je veux préparer un devis fictif'];
 export default function ArtisanAgent() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([greeting]);
