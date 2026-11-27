@@ -11,5 +11,6 @@ export const artisan = {
   ],
   serviceArea: ['Bordeaux', 'Bègles', 'Talence', 'Mérignac', 'Pessac', 'Le Bouscat'],
   hours: 'Du lundi au vendredi, de 8 h 30 à 18 h (horaires fictifs).',
+  schedule: 'Planning simulé sur les 30 prochains jours ; créneaux indicatifs de visite ou diagnostic. Aucune réservation réelle.',
   quoteFields: ['type de prestation', 'commune', 'type de bâtiment', 'description du besoin', 'délai souhaité'],
 };
