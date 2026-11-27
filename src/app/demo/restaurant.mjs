@@ -27,3 +27,9 @@ export const restaurant = {
   ],
   booking: { slots: ['12:00', '12:30', '13:00', '19:00', '19:30', '20:00', '20:30'], maxGuests: 6 },
 };
+
+// Référentiel unique partagé entre la carte, le catalogue et l'assistant.
+export const allergenCatalog = restaurant.allergenGuide.categories.map(allergen => ({
+  allergen,
+  dishes: restaurant.menu.filter(item => item.allergens.includes(allergen)).map(item => ({ id: item.id, name: item.name })),
+}));
